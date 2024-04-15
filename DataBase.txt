@@ -1,0 +1,31 @@
+--Create database MovieReview
+--
+create table Movies 
+( 
+	movieId int primary key,
+	title varchar(60),
+	releaseDate date,
+	director varchar(60),
+	category varchar(60),
+	movieDescription varchar(1000)		
+)
+--
+create table Users 
+( 
+	userId int primary key,
+	userName varchar(60),
+	userPassword varchar(15),
+	userEmail varchar(60),
+)
+--
+create table Reviews 
+( 
+	reviewId int primary key,
+	rating int,
+	userId int,
+	movieId int,
+	review varchar(1000),
+	reviewDate date,
+	foreign key (userId) references Users(userId),
+	foreign key (movieId) references Movies(movieId)
+)
