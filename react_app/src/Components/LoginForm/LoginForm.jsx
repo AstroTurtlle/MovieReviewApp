@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from "react";
 import './LoginForm.css';
 import { FaCircleUser,FaLock } from "react-icons/fa6";
@@ -14,88 +13,11 @@ const LoginForm = () => {
                     </div>
                     <div className="input-box">
                         <input type="password" placeholder='Password' required/>
-=======
-
-import './LoginForm.css';
-import { FaCircleUser,FaLock } from "react-icons/fa6";
-import React, { useEffect } from "react";
-import axios from "axios";
-import TextField from '@mui/material/TextField';
-import { useNavigate } from "react-router-dom";
-
-
-export const  LoginForm = () => {
-    const [username, setUsername] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const [error, setError] = React.useState(false);
-    const navigate = useNavigate();
-    const [ver, setVer] = React.useState(false);
-    
-    function changeUsername(event) {
-
-        setUsername(event.target.value);
-    }
-    function changePassword(event) {
-        setPassword(event.target.value);
-    }
-
-    // useEffect(() => {
-    //     if (localStorage.getItem("email") !== null)
-    //       navigate("/")
-    //   }, [])
-    //   useEffect(() => {
-    //     if (ver === true)
-    //       navigate("/Homepage")
-    //   }, [ver])
-    
-    //   const login = (event) => {
-    //     axios.post("http://192.168.35.185:8080/User/login",
-    //       {
-    //         email: inputEmail,
-    //         password: inputPassword
-    //       }
-    //     ).then((response) => {
-    //       const { data, status } = response;
-    //       if (status === 200) {
-    //         console.log("AM PRIMIT PACHET");
-    //         setVer(true);
-    //         localStorage.setItem("username", data.username);
-    //         localStorage.setItem("id", data.id);
-    //         localStorage.setItem("name", data.name);
-    //         localStorage.setItem("email", data.email);
-    //         localStorage.setItem("password", data.password);
-    //        // window.location.reload();
-    //       }
-    //       else {
-    //         setError(true);
-    //       }
-    //     }).catch((error) => {
-    //       console.log(error)
-    //       set or(true);
-    //     });
-    
-    
-    //   }
-    return <>
-        <div className="wrapper">
-            <form>
-                <h1>Login</h1>    
-                    <div className="input-box" >
-                        <TextField type="text" placeholder='Username' id='name' sx={{border: 'none',"& fieldset": { border: 'none' },}}  onChange={changeUsername}  required></TextField>
-                        <FaCircleUser className='icon' />
-                    </div>
-                    <div className="input-box">
-                        <TextField type="password" placeholder='Password' id='password'sx={{border: 'none',"& fieldset": { border: 'none' },}} onChange={changePassword} required></TextField>
->>>>>>> 19a08e7 (legaturi front/back pt logare+nav+dependente)
                         <FaLock className='icon'/>
                     </div>
                     <div className="remember-forgot">
                         <label>
-<<<<<<< HEAD
                             <input type="checkbox" />Keep me logged in
-=======
-                            <TextField type="checkbox" sx={{border: 'none',"& fieldset": { border: 'none' },}}  />Keep me logged in
->>>>>>> 19a08e7 (legaturi front/back pt logare+nav+dependente)
                         </label>
                         <a href="#"> Forgot password? </a>
                     </div>
@@ -103,11 +25,7 @@ export const  LoginForm = () => {
                     <div className="register-link">
                         <p>
                             Don't have an account?  
-<<<<<<< HEAD
                             <a href=""> 
-=======
-                            <a href="./RegisterForm"> 
->>>>>>> 19a08e7 (legaturi front/back pt logare+nav+dependente)
                                 Sign up here
                             </a>
                         </p>
@@ -115,14 +33,7 @@ export const  LoginForm = () => {
                     
             </form>
         </div>
-<<<<<<< HEAD
     );
 };
 
 export default LoginForm;   
-=======
-    </>
-
-};
-
->>>>>>> 19a08e7 (legaturi front/back pt logare+nav+dependente)
