@@ -1,8 +1,11 @@
 import React from "react";
 import './Homepage.css';
 
-const Homepage = () => {
-    
+export const Homepage = () => {
+    return
+    <>
+    <h1>Bueaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaf</h1>
+    </>
 };
 
-export default Homepage;   
+ 

@@ -1,16 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import LoginForm from './Components/LoginForm/LoginForm.jsx';
-import SignupForm from './Components/SignupForm/SignupForm.jsx';
-import Homepage from './Components/Homepage/Homepage.jsx';
-import Router from './Components/Router/Router.jsx';
 
+import { RouterProvider } from 'react-router-dom';
+import { router } from './Components/Router/Router';
+import { LoginForm } from './Components/LoginForm/LoginForm';
 function App() {
-  return (
-    <div>
-      <LoginForm/>
-    </div> 
-  );
+  return ( <RouterProvider router = {router} />
+  
+  )
 }
 
 export default App;
