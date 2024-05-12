@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import SearchBar from '../Search/searchBar';
 
 export function NavbarPrimary() {
   return (
@@ -13,6 +14,7 @@ export function NavbarPrimary() {
             <Nav.Link href="./LoginForm">Login</Nav.Link>
             <Nav.Link href="./RegisterForm">Register</Nav.Link>
           </Nav>
+          <SearchBar />
         </Container>
       </Navbar>
     </>
