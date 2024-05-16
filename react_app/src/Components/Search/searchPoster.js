@@ -1,11 +1,14 @@
 import React from "react";
+import './searchPoster.css';
 
 const MoviePoster = ({ title, year, poster }) => {
     return (
-        <div>
-            <img src={poster}/>
-            <h1>{title}</h1>
-            <p>{year}</p>
+        <div className="wrapper">
+            <img src={poster} alt="" style={{ height: '175px', width: '130px' }}/>
+            <div style={{ marginLeft: '20px', color: "white" }}>
+                <h3 className="title" >{title}</h3>
+                <p>{year}</p>
+            </div>
         </div>
     );
 };
