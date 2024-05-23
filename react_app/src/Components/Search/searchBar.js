@@ -38,7 +38,7 @@ const SearchBar = () => {
                 onChange={handleInputChange}
             />
         </div>
-        <div style={{ marginTop: '5px' }}>
+        <div style={{ marginTop: '5px',zIndex: 100 }}>
             {movieData && <MoviePoster title={movieData.title} year={movieData.year} poster={movieData.poster} />}
         </div>
     </div>
