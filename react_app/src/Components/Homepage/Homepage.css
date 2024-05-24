@@ -1,0 +1,19 @@
+.movies-list {
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    justify-content: center; 
+}
+
+.movies-list .movie-card {
+    flex: 1 1 calc(10% - 20px); 
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.container
+{
+    max-width: 90%;
+    margin-top: 20px;
+}
