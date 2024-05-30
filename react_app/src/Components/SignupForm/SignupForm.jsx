@@ -4,6 +4,7 @@ import { MdEmail } from "react-icons/md";
 import { FaCircleUser} from "react-icons/fa6";
 import { TbPasswordUser } from "react-icons/tb";
 import TextField from '@mui/material/TextField';
+import axios from "axios";
 
 
 export const SignupForm = () => {
@@ -30,27 +31,26 @@ export const SignupForm = () => {
         
     }
     function submit(event) {
-        
-        if (rePassword === password) {
+        if (  email!="" && password!=""  && username!="" && rePassword === password  ) {
            
-                    // axios.post("http://192.168.35.185:8080/User/InsertData",
-                    //     {
-                    //         username: username,
-                    //         email: email,
-                    //         password: password
-                    //     }
-                    // ).then((response) => {
-                    //     const {data, status} = response;
-                    //     console.log(response);
-                    // })
+            axios.post("http://localhost:8080/register", {
+                username: username,
+                email: email,
+                password: password
+                        }
+                    ).then((response) => {
+                        const {data, status} = response;
+                        console.log(response);
+                    })
      
             
         } else {
             console.log("false")
         }
+        
     }
     useEffect(() => {
-        if(rePassword !== password)
+        if(rePassword !== password && password !== rePassword )
             setPasswordError(true);
         else{
             setPasswordError(false);
@@ -83,6 +83,7 @@ export const SignupForm = () => {
                                     <button disabled type="submit" className="registerbtn" onClick={submit}>Register</button>
                                   :
                                     <button type="submit" className="registerbtn" onClick={submit}>Register</button>
+                                  
                 }
                     <div className="register-link">
                         <p>
@@ -96,4 +97,3 @@ export const SignupForm = () => {
         </div>
     </>
 };
-
