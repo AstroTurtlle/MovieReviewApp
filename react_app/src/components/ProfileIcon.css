@@ -1,0 +1,56 @@
+.profile-icon-container {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #333333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(240, 236, 236, 0.2);
+    z-index: 1000;
+    min-width: 153px;
+  }
+  .dropdown-menu a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .dropdown-menu a svg {
+    margin-right: 5px; /* Adăugăm o margine la dreapta pentru a separa iconița de text */
+  }
+  
+  .dropdown-menu a span {
+    margin-left: 10px; /* Adăugăm o margine la dreapta pentru a separa textul de iconița următoare */
+  }
+  .dropdown-item {
+    display: flex;
+    align-items: left;
+    padding: 10px;
+  }
+  
+  .dropdown-item svg {
+    margin-right: 5px;
+  }
+  .dropdown-item:hover {
+    background-color: #989898;
+  }
+  .login-profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar {
+    margin:0 auto; 
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  

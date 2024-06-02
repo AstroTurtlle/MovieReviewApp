@@ -29,3 +29,10 @@ create table Reviews
 	foreign key (userId) references Users(userId),
 	foreign key (movieId) references Movies(movieId)
 )
+create table UsersFilms (
+	userFilmId int primary key,
+	userId int,
+	movieId int,
+	foreign key (userId) references Users(userId),
+	foreign key (movieId) references Movies(movieId)
+)
