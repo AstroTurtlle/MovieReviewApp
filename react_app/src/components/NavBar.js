@@ -20,11 +20,13 @@ const NavBar = ({ onSearch }) => {
 
   const [sidebar, setSidebar] = useState(false);
 
-  const showSidebar = () => setSidebar(!sidebar)
+  const showSidebar = () => setSidebar(!sidebar);
+
+  const hideSidebar = () => setSidebar(false);
 
   const HomeclickHandle = () => {
     handleHomeClick();
-    showSidebar();
+    hideSidebar();
   }
 
   return (
@@ -52,7 +54,9 @@ const NavBar = ({ onSearch }) => {
           })}
         </ul>
       </nav>
-      <Link to="/" onClick={HomeclickHandle}>Home</Link>
+      <div className='nav-home-button'>
+        <Link to="/" onClick={HomeclickHandle}>Home</Link>
+      </div>
       <div className="search-bar">
         <input
           type="text"
@@ -62,7 +66,7 @@ const NavBar = ({ onSearch }) => {
         />
         <button onClick={handleSearch} type="button">Search</button>
       </div>
-      <div>
+      <div className='nav-log-buttons'>
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
       </div>

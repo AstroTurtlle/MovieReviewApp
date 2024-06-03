@@ -61,8 +61,6 @@ code {
 
 .navbar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 10px;
   background-color: #333333c4;
   backdrop-filter: blur(10px);
@@ -70,6 +68,9 @@ code {
   position:sticky;
   top: 0;
   z-index: 20;
+  justify-content: left;
+  width: 100%;
+  height: 64px;
 }
 
 .navbar a {
@@ -80,6 +81,7 @@ code {
 
 .search-bar {
   display: flex;
+  padding-left: 30%;
 }
 
 .search-bar input {
@@ -642,6 +644,7 @@ code {
     padding: 0;
     margin: 0;
     color: #fff;
+    padding-left: 50px;
 }
 
 .swiper-slide-small {
@@ -657,6 +660,19 @@ code {
     margin: 0 auto;
     overflow: hidden;
     z-index: 1;
+    background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  color: #fff;
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  width: auto;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 3px;
+  margin-bottom: 30px;
+  margin-left:10px ;
+  margin-right: 10px;
 }
 
 .swiper-small {
@@ -669,7 +685,7 @@ code {
 .swiper-slidesmall-content {
   width: 100%;
     height: auto;
-    padding-bottom: 30px;
+    padding-bottom: 0px;
     position: relative;
     display: inline-block;
     overflow: hidden;
@@ -735,7 +751,7 @@ code {
 .swipersmall-navigation {
   right: 35px;
   position: absolute;
-  bottom: 75px;
+  bottom: 55px;
   width: 40px;
   height: auto;
   z-index: 10;
@@ -865,3 +881,12 @@ code {
 .category-page-content .movie-list{
   margin: 0;
 }
+
+.nav-home-button {
+  padding-left: 10%;
+}
+
+.nav-log-buttons{
+  padding-left: 25%;
+}
+
