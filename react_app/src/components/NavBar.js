@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import ProfileIcon from './ProfileIcon';
 const NavBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
 
@@ -31,9 +31,10 @@ const NavBar = ({ onSearch }) => {
         />
         <button onClick={handleSearch} type="button">Search</button>
       </div>
-      <div>
+      <div className="login-profile">
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
+        <ProfileIcon />
       </div>
     </nav>
   );
