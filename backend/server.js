@@ -5,7 +5,6 @@ const app = express();
 const cors = require('cors');
 const PORT = 8080;
 app.use(cors());
-
 var mysql = require('mysql2');
 
 
@@ -33,7 +32,7 @@ app.post("/register", function(req, res) {
   const email = reqBody.email;
   const password = reqBody.password;
 
-  // Use parameterized query to avoid SQL injection
+  // Register
   const queryString = "INSERT INTO user (name, email, password) VALUES (?, ?, ?)";
   const values = [name, email, password];
 
@@ -50,6 +49,7 @@ app.post("/register", function(req, res) {
   });
 });
 
+//Login
 app.post("/login", function(req, res) {
   const { username, password } = req.body;
 
@@ -74,6 +74,7 @@ app.post("/login", function(req, res) {
 });
 
 
+/////////////////////
 
 //API for getting max 10 names of movies associated with the search query through the api
 app.get('/search', async function (request, response) {
