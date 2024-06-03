@@ -7,6 +7,11 @@ import moviesData from '../data/movies';
 import AddReview from './AddReview';
 import {LoginForm} from './LoginForm2';
 import {SignUpForm} from './SignUpForm2';
+import SwiperBig from './SwiperBig';
+import SwiperSmall from './SwipeSmall';
+import HomePage from './HomePage';
+import ActionPage from './ActionPage';
+import ComedyPage from './ComedyPage';
 
 const AppRoutes = () => {
   const [movies, setMovies] = useState(moviesData);
@@ -28,13 +33,16 @@ const AppRoutes = () => {
       <div className="App">
         <NavBar onSearch={handleSearch} />
         <Routes>
-          <Route
+        {/* <Route
             path="/"
             element={<MovieList movies={filteredMovies} />}
             onClick={resetSearch}
-          />
+          /> */}
           <Route path="/movies/:id" element={<MovieDetail />} />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/action" element={<ActionPage />} />
+          <Route path="/comedy" element={<ComedyPage />} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/movies/:id/add-review" element={<AddReview movies={movies} />} />
         </Routes>
