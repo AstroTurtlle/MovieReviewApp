@@ -1,5 +1,5 @@
 
-![alt text](3.png)
+![alt text](3.png)__
 1-Copy paste the dump code in a SQL query or Select Server>Data Import
 
 ![alt text](2.png)
