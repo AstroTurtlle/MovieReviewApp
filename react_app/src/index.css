@@ -81,7 +81,7 @@ code {
 
 .search-bar {
   display: flex;
-  padding-left: 30%;
+  padding-left: 25%;
 }
 
 .search-bar input {
@@ -851,8 +851,8 @@ code {
 .category-page-container {
   display: block;
   margin-bottom: 3rem;
-  padding-left: 58px;
-  padding-right: 58px;
+  padding-left: 48px;
+  padding-right: 48px;
 }
 
 .category-page-title {
@@ -865,6 +865,8 @@ code {
   line-height: 1.3;
   font-weight: 600;
   color: #fff;
+  padding-left:50px ;
+  margin-top: 50px;
 }
 
 .category-page-content {
@@ -886,7 +888,355 @@ code {
   padding-left: 10%;
 }
 
-.nav-log-buttons{
+.login-profile {
   padding-left: 25%;
 }
 
+.profil-header{
+  margin-top:15px ;
+  border-top: 2px solid rgba(255, 255, 255, .2);
+  border-bottom: 2px solid rgba(255, 255, 255, .2);
+  color: #fff;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  margin-bottom: 40px;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  clear: both;
+  display: flex;
+padding: 10px;
+background-color: #333333c4;
+backdrop-filter: blur(10px);
+color: white;
+z-index: 7;
+justify-content: left;
+width: 100%;
+}
+
+.ph-titlu {
+font-size: 30px;
+line-height: 1.4em;
+margin-bottom: 30px;
+}
+
+.nav-bar {
+margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin-top: 0;
+}
+
+.nav-item {
+display: inline-block;
+  margin: 0 15px;
+  text-align: -webkit-match-parent;
+  unicode-bidi: isolate;
+  font-weight: 400;
+}
+
+.nav-link {
+padding: 15px 10px;
+  line-height: 1.2em;
+  font-size: 14px;
+  color: #ffffff;
+  background: 0 0 ;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  outline: 0;
+}
+
+.nav-link:hover {
+color: #979797;
+}
+
+.nav-link-active {
+color:#ffffff;
+border-color: #ffffff;
+padding: 15px 10px;
+  line-height: 1.2em;
+  font-size: 14px;
+  background: 0 0 ;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  outline: 0;
+}
+
+.nav-link-active:hover {
+color:#979797;
+border-color: #979797;
+padding: 15px 10px;
+  line-height: 1.2em;
+  font-size: 14px;
+  background: 0 0 ;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  outline: 0;
+}
+
+.profile-box {
+max-width: 600px;
+margin: 0 auto 20px;
+}
+
+.container-profil-box {
+width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.content-area {
+padding-right: 190px;
+position: relative;
+padding: 30px;
+background: rgba(255, 255, 255, .05);
+border: 2px solid rgba(255, 255, 255, .2);
+  color: #fff;
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.rows {
+display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.form-label {
+font-size: 11px;
+  text-transform: uppercase;
+  opacity: .9;
+  font-weight: 400;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+.control-form {
+font-size: 13px;
+  border-radius: 6px;
+  border: none ;
+  padding: .7rem 1.2rem;
+  background-color: #ffffff;
+  width: 100%;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-group {
+margin-bottom: 20px;
+text-align: left;
+}
+
+.control-form:disabled {
+background-color: #3c4753;
+color:#ddd
+}
+
+.btn-pass {
+padding: 0 ;
+  background: 0 0 ;
+  box-shadow: none ;
+  color: #ffffff ;
+  font-size: 14px;
+  font-weight: 400;
+  border: 3px solid transparent;
+}
+
+.btn-pass:hover {
+padding: 0 ;
+  background: 0 0 ;
+  box-shadow: none ;
+  color: #979797 ;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.container-changepass {
+transition: height .35 ease;
+}
+
+.btn-save {
+  padding: .5rem 1rem;
+  border-radius: 8px;
+  width: 100%;
+  background: #ffffff;
+  color: #333;
+  box-shadow: none;
+  border: 1px solid transparent;
+  transition: color .05s ease-in-out, background-color .05s ease-in-out, border-color .05s ease-in-out, box-shadow .05s ease-in-out;
+}
+
+
+.bookmark-container {
+  width: 100%;
+}
+
+.film-list {
+  margin: -.75rem -.5rem;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flw-item {
+  width: calc(20% - 1rem);
+  margin: .7rem .5rem;
+  position: relative;
+}
+
+.film-poster {
+  border-radius: 0;
+  padding-bottom: 140%;
+  margin-bottom: .7rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, .1);
+  display: block;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+}
+
+.rating-box {
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  height: 20px;
+  border-radius: 0;
+  background: rgba(238, 238, 238, .2);
+  color: #ffffff;
+  bottom: 10px;
+  position: absolute;
+  right: 10px;
+  z-index: 10;
+}
+
+.star-color {
+  color: gold;
+}
+
+.bookmark-header {
+  margin-bottom: 25px;
+}
+
+.bookmark-films-header {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.films-area {
+  display: block;
+}
+
+.film-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  mask-image: linear-gradient(180deg,transparent, rgb(32, 31, 49) 0%, rgb(32, 31, 49) 70%, transparent);
+}
+
+.film-poster:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05, 1.05);
+}
+
+.film-details {
+  color: #aaa;
+  font-size: .9em;
+}
+
+.film-name {
+  font-size: 1em;
+  line-height: 1.3em;
+  margin: 0;
+  font-weight: 500;
+  margin-bottom: .5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dynamic-name {
+  color: #ffffff;
+  text-decoration: none;
+  outline: 0;
+  background-color: transparent;
+}
+
+.dynamic-name:hover {
+  color: #aaa;
+  text-decoration: none;
+  outline: 0;
+  background-color: transparent;
+}
+
+.remove-film {
+  position: absolute;
+  z-index: 9;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  font-size: 14px;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+  display: none;
+  transition: all 0.4s cubic-bezier(0.250, 0.885, 0, 1);
+}
+
+.film-poster:hover .remove-film {
+  display: inline-block;
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05, 1.05);
+}
+
+.container-profil-header {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.profile-title {
+  color: #fff;
+}

@@ -6,11 +6,11 @@ const ActionPage=() => {
 
     return (
         <div className="category-page-container">
-            <div className="category-page-title">
+            <div className="h2-heading category-page-title">
                 Action Movies
             </div>
             <div className="category-page-content">
-            <MovieList movies={moviesData}>
+            <MovieList movies={moviesData} bookmark='true'>
             </MovieList>
             </div>
         </div>

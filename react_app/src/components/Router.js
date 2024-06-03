@@ -12,6 +12,8 @@ import SwiperSmall from './SwipeSmall';
 import HomePage from './HomePage';
 import ActionPage from './ActionPage';
 import ComedyPage from './ComedyPage';
+import ProfilePage from './ProfilePage';
+import BookmarkPage from './BookmarkPage';
 
 const AppRoutes = () => {
   const [movies, setMovies] = useState(moviesData);
@@ -44,6 +46,8 @@ const AppRoutes = () => {
           <Route path="/action" element={<ActionPage />} />
           <Route path="/comedy" element={<ComedyPage />} />
           <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/bookmark" element={<BookmarkPage />} />
           <Route path="/movies/:id/add-review" element={<AddReview movies={movies} />} />
         </Routes>
       </div>
