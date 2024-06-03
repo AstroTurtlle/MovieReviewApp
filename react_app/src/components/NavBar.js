@@ -66,7 +66,7 @@ const NavBar = ({ onSearch }) => {
         />
         <button onClick={handleSearch} type="button">Search</button>
       </div>
-      <div className='nav-log-buttons'>
+      <div className='nav-log-buttons'></div>
       <div className="login-profile">
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
