@@ -234,6 +234,15 @@ code {
   max-width: 800px;
   margin: 5% auto;
   color: #fff;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  color: #fff;
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  width: auto;
+  height: auto;
+  padding: 10px;
 }
 
 .add-review header {
@@ -258,7 +267,9 @@ code {
 .add-review .rating,
 .add-review .user-rating,
 .add-review .general-rating {
-  margin-top: 10px;
+  margin-top: 20px;
+  display: flex;
+
 }
 
 .add-review .stars {
@@ -302,10 +313,11 @@ code {
   color: white;
   border: none;
   cursor: pointer;
+
 }
 
 .add-review .other-reviews {
-  margin-top: 30px;
+  margin-top: 50px;
   
 }
 
@@ -315,11 +327,12 @@ code {
 }
 
 .add-review .other-reviews .review {
-  border: 1px solid #ccc;
+  border: 2px solid rgba(255, 255, 255, 0.658);
   border-radius: 4px;
   padding: 10px;
   margin-bottom: 10px;
   list-style-type: none;
+  background-color: #333333e1;
 }
 
 .add-review .other-reviews .review h4 {
@@ -1239,4 +1252,132 @@ transition: height .35 ease;
 
 .profile-title {
   color: #fff;
+}
+
+.add-review-poster-container {
+  height: 300px;
+  width: 200px;
+  display: flex;
+  margin-right: 20px;
+}
+
+.add-review-poster {
+  border: 2px solid rgba(255, 255, 255, 0.658);
+  color: #fff;
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2),
+}
+
+.header-add-review {
+  display: flex;
+}
+
+.other-reviews {
+  padding: 0;
+}
+
+.add-review .other-reviews .other-reviews-title {
+  padding-left: 50px;
+  text-align: left;
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 30px;
+}
+
+.add-review-button {
+  text-align: right;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+.review-user-content {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.review-username {
+  margin-left: 20px;
+}
+
+.review-rating {
+  margin-left: 10px;
+}
+
+.review-rating .star {
+  cursor: default;
+}
+
+.review-rating .stars {
+  font-size: 1rem;
+}
+
+.review-comment {
+  text-align: left;
+  font-size: 1.1rem;
+  margin: 10px;
+}
+
+.movie-info-container {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.container-description {
+  border: 2px solid rgba(255, 255, 255, .2);
+  color: #fff;
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  padding: 10px;
+  background-color: #333333e1;
+}
+
+.movie-info-title {
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.movie-info-director {
+  padding-left: 30px;
+  display: flex;
+  font-weight: 600;
+}
+
+.p-director {
+  padding-left: 10px;
+  font-weight: 400;
+}
+
+.movie-info-duration{
+  padding-left: 30px;
+  display: flex;
+  font-weight: 600;
+}
+
+.p-duration {
+  padding-left: 10px;
+  font-weight: 400;
+}
+
+.general-rating-rating {
+  padding-top: 10px;
+  margin-left: 20%;
+}
+
+.user-rating-rating {
+  padding-top: 10px;
+  margin-left: 13%;
+}
+
+.general-rating .stars {
+  margin-left: 20px;
+}
+
+.user-rating .stars {
+  margin-left: 20px;
+}
+
+.review-writing-container {
+  resize: none;
 }

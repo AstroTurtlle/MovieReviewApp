@@ -17,7 +17,6 @@ import { OverlayTrigger } from 'react-bootstrap'
     </Tooltip>
   )
 
-  console.log("This" + bookmark)
 
   return (
     <Link to={`/movies/${movie.id}/add-review`} className="movie-card-link">

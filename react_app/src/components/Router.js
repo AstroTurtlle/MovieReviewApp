@@ -14,6 +14,7 @@ import ActionPage from './ActionPage';
 import ComedyPage from './ComedyPage';
 import ProfilePage from './ProfilePage';
 import BookmarkPage from './BookmarkPage';
+import AllMoviesPage from './AllMoviesPage';
 
 const AppRoutes = () => {
   const [movies, setMovies] = useState(moviesData);
@@ -48,6 +49,7 @@ const AppRoutes = () => {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/bookmark" element={<BookmarkPage />} />
+          <Route path="/allmovies" element={<AllMoviesPage />} />
           <Route path="/movies/:id/add-review" element={<AddReview movies={movies} />} />
         </Routes>
       </div>
