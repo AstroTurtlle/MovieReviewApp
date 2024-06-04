@@ -3,6 +3,7 @@ import { MdEmail } from "react-icons/md";
 import { FaCircleUser} from "react-icons/fa6";
 import { TbPasswordUser } from "react-icons/tb";
 import TextField from '@mui/material/TextField';
+import axios from "axios";
 
 
 export const SignUpForm = () => {
@@ -28,26 +29,21 @@ export const SignUpForm = () => {
         setRePassword(ev1.target.value);
         
     }
+    
     function submit(event) {
-        
-        if (rePassword === password) {
-           
-                    // axios.post("http://192.168.35.185:8080/User/InsertData",
-                    //     {
-                    //         username: username,
-                    //         email: email,
-                    //         password: password
-                    //     }
-                    // ).then((response) => {
-                    //     const {data, status} = response;
-                    //     console.log(response);
-                    // })
-     
-            
-        } else {
+        if (email!="" && password!=""  && username!="" && rePassword === password)
+            axios.post("http://localhost:8080/register", {
+                username: username,
+                email: email,
+                password: password
+            }).then((response) => {
+                const {data, status} = response;
+                console.log(response);
+            })
+        else
             console.log("false")
-        }
     }
+
     useEffect(() => {
         if(rePassword !== password)
             setPasswordError(true);
