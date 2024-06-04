@@ -82,7 +82,7 @@ db.connect(err =>{
   }else {
     console.log('Conectat la baza de date MovieReview');
   }
-}); */
+}); //*/
 //API for getting max 10 names of movies associated with the search query through the api
 app.get('/search', async function (request, response) {
   try {
