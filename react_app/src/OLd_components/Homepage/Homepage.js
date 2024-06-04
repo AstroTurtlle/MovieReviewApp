@@ -5,7 +5,7 @@ import MovieCard from '../MovieCard/MovieCard';
 import './Homepage.css';
 
 const moviesData = [
-    { title: "Movie 1", rating: "Rating 1",  poster: 'url1' },
+    { title: "Movie 1", rating: "Rating 1",  poster: "./Components/Assets/download.jpg" },
     { title: "Movie 2", rating: "Rating 2",  poster: "url2" },
     { title: "Movie 3", rating: "Rating 3",  poster: "url3" },
     { title: "Movie 4", rating: "Rating 4",  poster: "url4" },
