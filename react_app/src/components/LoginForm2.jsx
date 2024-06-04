@@ -1,62 +1,40 @@
-
-import { FaCircleUser,FaLock } from "react-icons/fa6";
-import React, { useEffect } from "react";
+import { FaCircleUser, FaLock } from "react-icons/fa6";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
 
-
 export const  LoginForm = () => {
-    const [username, setUsername] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const [error, setError] = React.useState(false);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
-    const [ver, setVer] = React.useState(false);
-    
-    function changeUsername(event) {
 
+    function changeUsername(event) {
         setUsername(event.target.value);
     }
+
     function changePassword(event) {
         setPassword(event.target.value);
     }
 
-    // useEffect(() => {
-    //     if (localStorage.getItem("email") !== null)
-    //       navigate("/")
-    //   }, [])
-    //   useEffect(() => {
-    //     if (ver === true)
-    //       navigate("/Homepage")
-    //   }, [ver])
-    
-    //   const login = (event) => {
-    //     axios.post("http://192.168.35.185:8080/User/login",
-    //       {
-    //         email: inputEmail,
-    //         password: inputPassword
-    //       }
-    //     ).then((response) => {
-    //       const { data, status } = response;
-    //       if (status === 200) {
-    //         console.log("AM PRIMIT PACHET");
-    //         setVer(true);
-    //         localStorage.setItem("username", data.username);
-    //         localStorage.setItem("id", data.id);
-    //         localStorage.setItem("name", data.name);
-    //         localStorage.setItem("email", data.email);
-    //         localStorage.setItem("password", data.password);
-    //        // window.location.reload();
-    //       }
-    //       else {
-    //         setError(true);
-    //       }
-    //     }).catch((error) => {
-    //       console.log(error)
-    //       set or(true);
-    //     });
-    
-    
-    //   }
+    useEffect(() => {
+        if (localStorage.getItem("email") !== null)
+            navigate("/");
+    }, []);
+
+    const submit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await axios.post('http://localhost:8080/login', { username, password });
+            console.log(response.data); // Log the response data
+            navigate("/");
+        } catch (error) {
+            console.error('Error:', error);
+            setErrorMessage('Invalid username or password');
+        }
+    };
     return <>
         <div className="wrapper">
             <form>
@@ -75,7 +53,7 @@ export const  LoginForm = () => {
                         </label>
                         <a href="#"> Forgot password? </a>
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit" onClick={submit}>Login</button>
                     <div className="register-link">
                         <p>
                             Don't have an account?  
@@ -90,4 +68,3 @@ export const  LoginForm = () => {
     </>
 
 };
-
