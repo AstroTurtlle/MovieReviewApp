@@ -8,5 +8,10 @@ export const SidebarData = [
         title: 'Comedy',
         path: '/comedy',
         cName: 'nav-text'
+    },
+    {
+        title: 'All Movies',
+        path: '/allmovies',
+        cName: 'nav-text'
     }
 ]

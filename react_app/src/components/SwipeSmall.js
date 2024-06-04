@@ -34,7 +34,7 @@ const SwiperSmall = ({movies,category}) => {
                 <div className='swiper-slidesmall-number'>
                     <span>0{ movie.id}</span>
                 </div>
-                <MovieCard key={movie.id} movie={movie}>
+                <MovieCard key={movie.id} movie={movie} bookmark={true}>
                 </MovieCard>
                 </div>
             </div>

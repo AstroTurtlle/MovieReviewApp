@@ -2,19 +2,19 @@ import React, { useEffect } from "react";
 import moviesData from '../data/movies';
 import MovieList from './MovieList';
 
-const ActionPage=() => {
+const AllMoviesPage=() => {
 
     return (
         <div className="category-page-container">
-            <div className="h2-heading category-page-title">
-                Action Movies
+            <div className="category-page-title">
+                All Movies
             </div>
             <div className="category-page-content">
-            <MovieList movies={moviesData} bookmark='true'>
+            <MovieList movies={moviesData} bookmark={true}>
             </MovieList>
             </div>
         </div>
         )
 
 }
-export default ActionPage;
+export default AllMoviesPage;

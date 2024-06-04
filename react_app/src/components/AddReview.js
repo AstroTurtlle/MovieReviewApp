@@ -42,34 +42,65 @@ const AddReview = ({ movies }) => {
 
   return (
     <div className="add-review">
-      <header>
-        <img src={movie.imageUrl} alt={movie.title} />
+      <header className='header-add-review'>
+        <div className='add-review-poster-container'>
+          <img className='add-review-poster' src={movie.imageBGposter} alt={movie.title} />
+        </div>
         <div className="movie-info">
-          <h2>{movie.title}</h2>
-          <p> Director: {movie.director}</p>
-          <p> Screen Time: {movie.duration}</p>        
-          <p>{movie.description}</p>
+          <div className='movie-info-title'>
+            <h2>{movie.title}</h2>
+          </div>
+          <div className='movie-info-container'>
+            <div className='movie-info-director'>
+            Director:<p className='p-director'>{movie.director}</p>
+            </div>
+            <div className='movie-info-duration'>
+            Screen Time:<p className='p-duration'>{movie.duration}</p>    
+            </div>
+            <div className='container-description'>
+              <p>{movie.description}</p>
+            </div>    
+          </div>
           <div className="general-rating">
-            <label>Rating: </label>
+            <div className='general-rating-rating'>
+              <label>Rating: </label>
+            </div>
             <div className="stars">{renderStars(movie.rating, () => {})}</div>
           </div>
           <div className="user-rating">
-            <label>Your Rating: </label>
+            <div className='user-rating-rating'>
+              <label>Your Rating: </label>
+            </div>
             <div className="stars">{renderStars(userRating, handleRatingClick)}</div>
           </div>
         </div>
       </header>
       <div className="review-form">
-        <textarea placeholder="Write your review..." rows="4" cols="50"></textarea>
-        <button>Add Review</button>
+        <textarea placeholder="Write your review..." rows="4" cols="50" className='review-writing-container'></textarea>
+        <div  className='add-review-button'>
+          <button>Add Review</button>
+        </div>
       </div>
       <div className="other-reviews">
+        <div className='other-reviews-title'>
         <h3>Other Reviews</h3>
-        <ul>
+        </div>
+        <ul className='other-reviews'>
           {movie.reviews.map((review, index) => (
             <li key={index} className="review">
-              <h4>{review.username}</h4>
-              <p>{review.content}</p>
+              <div className='review-user-content'>
+                <div className='review-username'>
+                  <h4>{review.username}</h4>
+                </div>
+                <div className='review-rating'>
+                <div className="stars">
+                  {renderStars(review.reviewrating, () => {})}
+                </div>
+                </div>
+              </div>
+              <div className='review-comment'>
+                <p>{review.content}</p>
+              </div>
             </li>
           ))}
         </ul>

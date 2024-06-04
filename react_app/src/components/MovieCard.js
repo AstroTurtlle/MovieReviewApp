@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-bootstrap'
 import { OverlayTrigger } from 'react-bootstrap'
 
-  const MovieCard = ({ movie }) => {
+  const MovieCard = ({ movie, bookmark }) => {
 
   const tooltip_Bookmark = (
     <Tooltip id="tooltip_B">
@@ -11,13 +11,22 @@ import { OverlayTrigger } from 'react-bootstrap'
     </Tooltip>
   )
 
+  const tooltip_Remove = (
+    <Tooltip id="tooltip_R">
+        Remove
+    </Tooltip>
+  )
+
+
   return (
     <Link to={`/movies/${movie.id}/add-review`} className="movie-card-link">
       <div className="movie-card">
         <img className='card-img' src={(movie.imageBGposter)} alt={movie.title} />
-        <OverlayTrigger placement="top" delay={{ show: 250, hide: 0 }} overlay={tooltip_Bookmark}>
+        <OverlayTrigger placement="top" delay={{ show: 250, hide: 0 }} overlay={bookmark ? tooltip_Bookmark : tooltip_Remove}>
         <div className='bookmark-film'>
-            <i className='fas fa-bookmark bookmark'>
+            <i className='fas fa-bookmark bookmark' style={{display: bookmark ? '' : 'none'}}>
+            </i>
+            <i className='fas fa-times bookmark' style={{display: bookmark ? 'none' : ''}}>
             </i>
         </div>
         </OverlayTrigger >

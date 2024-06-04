@@ -10,7 +10,7 @@ const ComedyPage=() => {
                 Comedy Movies
             </div>
             <div className="category-page-content">
-            <MovieList movies={moviesData}>
+            <MovieList movies={moviesData} bookmark={true}>
             </MovieList>
             </div>
         </div>
