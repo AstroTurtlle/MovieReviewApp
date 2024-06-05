@@ -1,20 +1,18 @@
 const axios = require('axios');
+bodyParser =require('body-parser');
 var express = require('express');
 const app = express();
 const cors = require('cors');
 const PORT = 8080;
-//const mysql = require('mysql');
 app.use(cors());
 var mysql = require('mysql2');
-
-
 
 ///////////////////////
 app.use(bodyParser.json());
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "root",
+  password: "password",
   database: "dbtest"
 });
 
@@ -72,17 +70,8 @@ app.post("/login", function(req, res) {
       }
   });
 });
-
-
 /////////////////////
 
-db.connect(err =>{
-  if(err){
-    console.error('Eroare la conectarea bazei de date:',err);
-  }else {
-    console.log('Conectat la baza de date MovieReview');
-  }
-}); //*/
 //API for getting max 10 names of movies associated with the search query through the api
 app.get('/search', async function (request, response) {
   try {
@@ -164,6 +153,7 @@ app.post('/reviews', (req, res) => {
     }
   });
 });
+
 app.listen(PORT, () => {
 console.log(`Express server running at http://localhost:${PORT}/`);
 });
