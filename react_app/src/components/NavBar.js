@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import ProfileIcon from './ProfileIcon';
 import { isAuthenticated } from './Utils'; // Importă funcția isAuthenticated
+import axios from 'axios';
 
 const NavBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -11,7 +12,19 @@ const NavBar = ({ onSearch }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    onSearch(query);
+    if (query != '') {
+      axios.get('http://localhost:8080/search', {
+          params: {movie_name: query}
+      }).then(({data}) => {
+          if (data.error) {
+              console.log("No results found");
+          }
+          else {
+              if(data != "No results found")
+                navigate(`/movies/${data.movie.movieId}/add-review`);
+          }
+      })
+    }
   };
 
   const handleHomeClick = () => {
