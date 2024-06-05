@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import ProfileIcon from './ProfileIcon';
+import { isAuthenticated } from './Utils'; // Importă funcția isAuthenticated
+
 const NavBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
 
@@ -27,7 +29,12 @@ const NavBar = ({ onSearch }) => {
   const HomeclickHandle = () => {
     handleHomeClick();
     hideSidebar();
-  }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    navigate('/login');
+  };
 
   return (
     <nav className="navbar">
@@ -35,23 +42,21 @@ const NavBar = ({ onSearch }) => {
         <i className='fas fa-bars' onClick={showSidebar}></i>
       </Link>
       <nav className={sidebar ? 'nav-menu-active' : 'nav-menu'}>
-        <ul className='nav-menu-items' >
+        <ul className='nav-menu-items'>
           <li className='navbar-toggle'>
             <Link to="#" className='menu-bars'>
               <i className='fas fa-times' onClick={showSidebar}></i>
             </Link>
           </li>
           <div className='nav-text-tab'>Genres</div>
-          {SidebarData.map((item, index) => {
-            return(
-              <li key={index} className={item.cName}>
-                <Link to={item.path} onClick={showSidebar}>
-                  <i></i>
-                  <span>{item.title}</span>
-                </Link>
-              </li>
-            )
-          })}
+          {SidebarData.map((item, index) => (
+            <li key={index} className={item.cName}>
+              <Link to={item.path} onClick={showSidebar}>
+                <i></i>
+                <span>{item.title}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
       <div className='nav-home-button'>
@@ -68,8 +73,18 @@ const NavBar = ({ onSearch }) => {
       </div>
       <div className='nav-log-buttons'></div>
       <div className="login-profile">
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign Up</Link>
+        {isAuthenticated() ? (
+          <>
+            <Link to="/profile">Profile</Link> 
+            <Link to="/bookmark">Bookmarks</Link>
+            <button onClick={handleLogout}>Logout</button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </>
+        )}
         <ProfileIcon />
       </div>
     </nav>

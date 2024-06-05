@@ -6,13 +6,15 @@ const cors = require('cors');
 const PORT = 8080;
 app.use(cors());
 var mysql = require('mysql2');
+const jwt = require('jsonwebtoken');
 
+const secretKey = 'bauwow';
 ///////////////////////
 app.use(bodyParser.json());
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "password",
+  password: "root",
   database: "dbtest"
 });
 
@@ -61,14 +63,33 @@ app.post("/login", function(req, res) {
           res.status(500).send("An error occurred while performing login.");
       } else {
           if (results.length > 0) {
-              // User authenticated, send success response
-              res.status(200).send("Login successful");
+              // User authenticated, generate and send token
+              const user = results[0];
+              const token = jwt.sign({ id: user.id, username: user.name }, secretKey, { expiresIn: '1h' });
+              res.status(200).json({ message: "Login successful", token });
           } else {
               // User not found or invalid credentials, send error response
               res.status(401).send("Invalid username or password");
           }
       }
   });
+});
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, secretKey, (err, user) => {
+      if (err) return res.sendStatus(403);
+      req.user = user;
+      next();
+  });
+}
+
+app.get('/protected', authenticateToken, (req, res) => {
+  res.status(200).json({ message: 'Ai acces la această rută protejată', user: req.user });
 });
 /////////////////////
 
