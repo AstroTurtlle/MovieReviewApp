@@ -31,7 +31,7 @@ app.post("/register", function(req, res) {
   const password = reqBody.password;
 
   // Register
-  const queryString = "INSERT INTO user (name, email, password) VALUES (?, ?, ?)";
+  const queryString = "INSERT INTO Users (userName, userEmail, userPassword) VALUES (?, ?, ?)";
   const values = [name, email, password];
 
   connection.query(queryString, values, function (err, result) {
@@ -52,7 +52,7 @@ app.post("/login", function(req, res) {
   const { username, password } = req.body;
 
   // Query to check if the username and password match
-  const queryString = "SELECT * FROM user WHERE name = ? AND password = ?";
+  const queryString = "SELECT * FROM Users WHERE userName = ? AND userPassword = ?";
   const values = [username, password];
 
   connection.query(queryString, values, function(err, results) {
