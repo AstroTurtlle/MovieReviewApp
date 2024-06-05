@@ -24,7 +24,7 @@ const BookmarkPage = () => {
                                 <a className='nav-link' href='/profile'>
                                 <i className='fas fa-user mr-2'>
                                     </i>
-                                Profile
+                                Edit Profile
                                 </a>
                             </li>
                             <li className='nav-item'>

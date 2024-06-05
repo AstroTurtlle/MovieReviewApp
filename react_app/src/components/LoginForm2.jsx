@@ -21,6 +21,7 @@ export const  LoginForm = () => {
     useEffect(() => {
         if (localStorage.getItem("email") !== null)
             navigate("/");
+       
     }, []);
 
     const submit = async (event) => {
@@ -29,6 +30,7 @@ export const  LoginForm = () => {
         try {
             const response = await axios.post('http://localhost:8080/login', { username, password });
             console.log(response.data); // Log the response data
+            localStorage.setItem('authToken', response.data.token);
             navigate("/");
         } catch (error) {
             console.error('Error:', error);
