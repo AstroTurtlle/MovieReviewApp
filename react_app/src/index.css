@@ -1381,3 +1381,42 @@ transition: height .35 ease;
 .review-writing-container {
   resize: none;
 }
+
+.Movie_list_More_Movies
+{
+  align-content: center;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.More_Movies_left_aligned
+{
+  margin-top: 70px; 
+}
+.Movie_list_More_Movies .movie-card
+{
+  width: 268px;
+  height: auto;
+}
+
+.More_Movies_left_aligned
+{
+  font-size: 30px;
+        -webkit-line-clamp: 2;
+        line-height: 1.2em;
+        font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: left;
+    color: #ffffff;
+    margin-left: 3%;
+}
+
+.link_all_movies_design
+{
+  margin-top: 5%;
+  font-size: large;
+  color: white;
+  
+}
