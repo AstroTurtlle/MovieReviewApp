@@ -12,17 +12,43 @@ export const SignUpForm = () => {
     const [password, setPassword] = React.useState("");
     const [rePassword, setRePassword] = React.useState("");
     const [passwordError, setPasswordError] = React.useState(false);
+    const [usernameError, setUsernameError] = React.useState(false);
+    const [emailError, setEmailError] = React.useState(false);
+    const [passwordFormatError, setPasswordFormatError] = React.useState(false);
     function changeUsername(event) {
-
-        setUsername(event.target.value);
+        const value = event.target.value;
+        if (
+            value.length > 15 ||
+            /\s/.test(value) ||
+            /[,\.<>\[\]{};:'"?\/\\|!~`]/.test(value)
+        ) {
+            setUsernameError(true);
+        } else {
+            setUsernameError(false);
+        }
+        setUsername(value);
     }
     
     function changeEmail(event) {
 
-        setEmail(event.target.value);
+        const value = event.target.value;
+        if (!/^\S+@\S+\S+\.com$/.test(value)) {
+            setEmailError(true);
+        } else {
+            setEmailError(false);
+        }
+        setEmail(value);
     }
     function changePassword(event) {
-        setPassword(event.target.value);
+        const value = event.target.value;
+        if (
+            !/(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])(?!.*[<>\/\\|{}[\];:'"?\-+~\s])[A-Za-z\d!@#$%^&*()_+]{8,}/.test(value)
+        ) {
+            setPasswordFormatError(true);
+        } else {
+            setPasswordFormatError(false);
+        }
+        setPassword(value);
     }
   
     function passVer(ev1) {
@@ -32,7 +58,7 @@ export const SignUpForm = () => {
     
     function submit(event) {
         event.preventDefault();
-        if (email!="" && password!=""  && username!="" && rePassword === password)
+        if (email!="" && !passwordError  && username!="" && !passwordFormatError && rePassword === password)
             axios.post("http://localhost:8080/register", {
                 username: username,
                 email: email,
@@ -58,15 +84,19 @@ export const SignUpForm = () => {
             <form action="" >
                 <h1>Sign up</h1>    
                     <div className="input-box">
-                        <TextField type="email" placeholder='Email' id="email" onChange={changeEmail} sx={{border: 'none',"& fieldset": { border: 'none' },}} required/>
+                        <TextField type="email" placeholder='Email' id="email" onChange={changeEmail} sx={{border: 'none',"& fieldset": { border: 'none' },}} required error={emailError} helperText={emailError ? "Invalid email format" : null}/>
                         <MdEmail className='icon' />
                     </div>
                     <div className="input-box">
-                        <TextField type="text" placeholder='Username' id="name" onChange={changeUsername} sx={{border: 'none',"& fieldset": { border: 'none' },}} required/>
+                        <TextField type="text" placeholder='Username' id="name" onChange={changeUsername} sx={{border: 'none',"& fieldset": { border: 'none' },}} required error={usernameError} helperText={usernameError ? "Invalid username format" : null}/>
                         <FaCircleUser className='icon' />
                     </div>
                     <div className="input-box">
-                        <TextField type="password" placeholder='Password'id="password" onChange={changePassword} sx={{border: 'none',"& fieldset": { border: 'none' },}} required/>
+                        <TextField type="password" placeholder='Password'id="password" onChange={changePassword} sx={{border: 'none',"& fieldset": { border: 'none' },}} required error={passwordFormatError} helperText={
+                                passwordFormatError
+                                    ? "Password must contain at least 8 characters, one uppercase letter, one digit, and no spaces or special characters"
+                                    : null
+                            }/>
                         <TbPasswordUser className='icon'/>
                     </div>
                     <div className="input-box">
@@ -74,12 +104,12 @@ export const SignUpForm = () => {
                         <TbPasswordUser className='icon'/>
 
                     </div>
-                    {
-                    passwordError ? 
+                    
+                   { passwordError || usernameError || emailError || passwordFormatError ? (
                                     <button disabled type="submit" className="registerbtn" onClick={submit}>Register</button>
-                                  :
+                   ):(
                                     <button type="submit" className="registerbtn" onClick={submit}>Register</button>
-                }
+                )}
                     <div className="register-link">
                         <p>
                             Already have an account?  
