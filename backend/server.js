@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "root",
-  database: "dbtest"
+  database: "moviereview"
 });
 
 connection.connect(function(err) {
@@ -28,13 +28,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.post("/register", function(req, res) {
   const reqBody = req.body;
-  const name = reqBody.username;
-  const email = reqBody.email;
-  const password = reqBody.password;
+  const userName = reqBody.userName;
+  const userEmail = reqBody.userEmail;
+  const userPassword = reqBody.userPassword;
 
   // Register
-  const queryString = "INSERT INTO user (name, email, password) VALUES (?, ?, ?)";
-  const values = [name, email, password];
+  const queryString = "INSERT INTO users (userName, userPassword, userEmail) VALUES (?, ?, ?)";
+  const values = [userName, userPassword, userEmail];
 
   connection.query(queryString, values, function (err, result) {
       if (err) {
@@ -51,11 +51,11 @@ app.post("/register", function(req, res) {
 
 //Login
 app.post("/login", function(req, res) {
-  const { username, password } = req.body;
+  const { userName, userPassword } = req.body;
 
   // Query to check if the username and password match
-  const queryString = "SELECT * FROM user WHERE name = ? AND password = ?";
-  const values = [username, password];
+  const queryString = "SELECT * FROM users WHERE userName = ? AND userPassword = ?";
+  const values = [userName, userPassword];
 
   connection.query(queryString, values, function(err, results) {
       if (err) {
@@ -65,8 +65,8 @@ app.post("/login", function(req, res) {
           if (results.length > 0) {
               // User authenticated, generate and send token
               const user = results[0];
-              const token = jwt.sign({ id: user.id, username: user.name }, secretKey, { expiresIn: '1h' });
-              res.status(200).json({ message: "Login successful", token,userId:user.id });
+              const token = jwt.sign({ id: user.userId, username: user.userName }, secretKey, { expiresIn: '1h' });
+              res.status(200).json({ message: "Login successful", token,userId:user.userId });
           } else {
               // User not found or invalid credentials, send error response
               res.status(401).send("Invalid username or password");

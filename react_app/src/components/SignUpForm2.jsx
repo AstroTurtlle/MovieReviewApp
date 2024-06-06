@@ -7,9 +7,9 @@ import axios from "axios";
 
 
 export const SignUpForm = () => {
-    const [username, setUsername] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [userName, setUsername] = React.useState("");
+    const [userEmail, setEmail] = React.useState("");
+    const [userPassword, setPassword] = React.useState("");
     const [rePassword, setRePassword] = React.useState("");
     const [passwordError, setPasswordError] = React.useState(false);
     function changeUsername(event) {
@@ -31,11 +31,11 @@ export const SignUpForm = () => {
     }
     
     function submit(event) {
-        if (email!="" && password!=""  && username!="" && rePassword === password)
+        if (userEmail!="" && userPassword!=""  && userName!="" && rePassword === userPassword)
             axios.post("http://localhost:8080/register", {
-                username: username,
-                email: email,
-                password: password
+                userName: userName,
+                userPassword: userPassword,
+                userEmail: userEmail
             }).then((response) => {
                 const {data, status} = response;
                 console.log(response);
@@ -45,7 +45,7 @@ export const SignUpForm = () => {
     }
 
     useEffect(() => {
-        if(rePassword !== password)
+        if(rePassword !== userPassword)
             setPasswordError(true);
         else{
             setPasswordError(false);

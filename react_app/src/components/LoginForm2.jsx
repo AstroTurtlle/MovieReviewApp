@@ -5,8 +5,8 @@ import TextField from '@mui/material/TextField';
 import { useNavigate } from "react-router-dom";
 
 export const  LoginForm = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [userName, setUsername] = useState("");
+    const [userPassword, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export const  LoginForm = () => {
     }
 
     useEffect(() => {
-        if (localStorage.getItem("email") !== null)
+        if (localStorage.getItem("userEmail") !== null)
             navigate("/");
        
     }, []);
@@ -28,7 +28,7 @@ export const  LoginForm = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/login', { username, password });
+            const response = await axios.post('http://localhost:8080/login', { userName, userPassword });
             console.log(response.data); // Log the response data
             localStorage.setItem('authToken', response.data.token);
             localStorage.setItem('userId', response.data.userId);
