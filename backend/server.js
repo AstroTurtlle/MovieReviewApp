@@ -66,7 +66,7 @@ app.post("/login", function(req, res) {
               // User authenticated, generate and send token
               const user = results[0];
               const token = jwt.sign({ id: user.id, username: user.name }, secretKey, { expiresIn: '1h' });
-              res.status(200).json({ message: "Login successful", token });
+              res.status(200).json({ message: "Login successful", token,userId:user.id });
           } else {
               // User not found or invalid credentials, send error response
               res.status(401).send("Invalid username or password");
@@ -92,6 +92,23 @@ app.get('/protected', authenticateToken, (req, res) => {
   res.status(200).json({ message: 'Ai acces la această rută protejată', user: req.user });
 });
 /////////////////////
+app.post('/reviews', (req, res) => {
+  const { rating, userId, movieId, review, reviewDate } = req.body;
+  const queryString = "INSERT INTO Reviews (rating, userId, movieId, review, reviewDate) VALUES (?, ?, ?, ?, ?)";
+  const values = [rating, userId, movieId, review, reviewDate];
+
+  connection.query(queryString, values, function(err, result) {
+      if (err) {
+          console.error("An error occurred:", err);
+          // Send an error response to the client
+          res.status(500).send("An error occurred while inserting review into the database.");
+      } else {
+          console.log("Review successfully inserted into the database");
+          // Send a success response to the client
+          res.status(200).send("Review inserted successfully.");
+      }
+  })});
+//////////
 
 //API for getting max 10 names of movies associated with the search query through the api
 app.get('/search', async function (request, response) {
@@ -159,21 +176,7 @@ app.delete('/user/films/:userId/:movieId', (req, res) => {
   });
 });
 
-app.post('/reviews', (req, res) => {
-  const { rating, userId, movieId, review, reviewDate } = req.body;
-  const query = 'INSERT INTO Reviews (rating, userId, movieId, review, reviewDate) VALUES (?, ?, ?, ?, ?)';
-  db.query(query, [rating, userId, movieId, review, reviewDate], (err, result) =>{
 
-  
-    if(err) {
-      console.error('eroare la adaugarea recenziei:',err);
-      result.status(500).send('eroare la adaugarea recenziei');
-    }else {
-      console.log("recenzia a fost adaugata cu succes");
-      result.status(201).send('recenzia a fost adaugata cu succes');
-    }
-  });
-});
 
 app.listen(PORT, () => {
 console.log(`Express server running at http://localhost:${PORT}/`);
