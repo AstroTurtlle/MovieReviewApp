@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from "axios";
 
 
 const AddReview = ({ movies }) => {
@@ -7,7 +8,8 @@ const AddReview = ({ movies }) => {
   const movie = movies.find(movie => movie.id === parseInt(id));
   const [userRating, setUserRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-
+  const [reviewText, setReviewText] = useState('');
+  const userId = localStorage.getItem('userId'); // Preia ID-ul utilizatorului din localStorage
   const handleRatingClick = (rating) => {
     setUserRating(rating);
   };
@@ -18,6 +20,40 @@ const AddReview = ({ movies }) => {
 
   const handleMouseLeave = () => {
     setHoverRating(0);
+  };
+  const handleAddReview = async (event) => {
+    event.preventDefault();
+    const reviewDate = new Date().toISOString().split('T')[0];
+
+    const userId = localStorage.getItem('userId'); // Preluare userId din localStorage
+
+    if (!userId) {
+      alert('You need to be logged in to add a review.');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:8080/reviews', {
+        rating: userRating,
+        userId: userId,
+        movieId: id,
+        review: reviewText,
+        reviewDate: reviewDate
+      }, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      if (response.status === 201) {
+        alert('Review added successfully!');
+      } else {
+        alert(`Failed to add review: ${response.data}`);
+      }
+    } catch (error) {
+      console.error('Error adding review:', error);
+      alert('Failed to add review: ' + error.message);
+    }
   };
 
   const renderStars = (rating, setRating) => {
@@ -76,9 +112,11 @@ const AddReview = ({ movies }) => {
         </div>
       </header>
       <div className="review-form">
-        <textarea placeholder="Write your review..." rows="4" cols="50" className='review-writing-container'></textarea>
-        <div  className='add-review-button'>
-          <button>Add Review</button>
+      <textarea placeholder="Write your review..." rows="4" cols="50" className='review-writing-container' value={reviewText} onChange={(e) => setReviewText(e.target.value)}></textarea>
+
+        <div className='add-review-button'>
+
+          <button onClick={handleAddReview}>Add Review</button>
         </div>
       </div>
       <div className="other-reviews">
