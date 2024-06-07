@@ -128,10 +128,10 @@ app.get('/search', async function (request, response) {
       });
 });
 
-app.post('/user/films',(req, res) =>{
+app.post('/user/addfilm',(req, res) =>{
   const { userId,movieId } = req.body;
   const query = 'INSERT INTO UsersFilms (userId, movieId) VALUES (?, ?)';
-  db.query(query, [userId, movieId], (err, result) =>{
+  connection.query(query, [userId, movieId], (err, result) =>{
     if(err) {
       console.err('eroare la adaugarea filmului:',err);
       res.status(500).send('eroare la adaugarea filmului');
@@ -144,8 +144,8 @@ app.post('/user/films',(req, res) =>{
 
 app.delete('/user/films/:userId/:movieId', (req, res) => {
   const { userId, movieId } = req.params;
-  const query = 'DELETE FROM UserFilms WHERE userId = ? AND movieId = ?';
-  db.query(query, [userId, movieId], (err, result) =>{
+  const query = 'DELETE FROM UsersFilms WHERE userId = ? AND movieId = ?';
+  connection.query(query, [userId, movieId], (err, result) =>{
     if (err) {
       console.error('eroare la stergerea filmului:', err);
       res.status(500).send('eroare la stergerea filmului');
@@ -157,6 +157,55 @@ app.delete('/user/films/:userId/:movieId', (req, res) => {
 });
 
 
+app.get('/user/films',(req, res) =>{
+  const { userId } = req.query;
+  const query = 'SELECT movieId FROM UsersFilms WHERE userId = ?';
+  connection.query(query, userId, (err, result) =>{
+    if(err) {
+      console.err('eroare la adaugarea filmului:',err);
+      res.status(500).send('eroare la adaugarea filmului');
+    }else {
+      movieIds = result.map((item) => item.movieId);
+      const query2 = 'SELECT * FROM Movies WHERE movieId IN (?)';
+      connection.query(query2, [movieIds], (err, result) =>{
+        if(err) {
+          console.err('eroare la adaugarea filmului:',err);
+          res.status(500).send('eroare la adaugarea filmului');
+        }else {
+          console.log('filmele au fost afisate cu succes');
+          res.status(200).send(result);
+        }
+      });
+    }
+  });
+});
+
+app.get('/allfilms', (req, res) => {
+  const query = 'SELECT * FROM Movies';
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.error('eroare la afisarea filmelor:', err);
+      res.status(500).send('eroare la afisarea filmelor');
+    }else {
+      console.log('filmele au fost afisate cu succes');
+      res.status(200).send(result);
+    }
+  });
+});
+
+app.get('/userinfo', (req, res) => {
+  const { userId } = req.query;
+  const query = 'SELECT * FROM Users WHERE userId = ?';
+  connection.query(query, [userId], (err, result) => {
+    if (err) {
+      console.error('eroare la afisarea informatiilor:', err);
+      res.status(500).send('eroare la afisarea informatiilor');
+    }else {
+      console.log('informatiile au fost afisate cu succes');
+      res.status(200).send(result);
+    }
+  });
+});
 
 app.listen(PORT, () => {
 console.log(`Express server running at http://localhost:${PORT}/`);
