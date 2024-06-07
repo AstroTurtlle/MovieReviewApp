@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,Navigate  } from 'react-router-dom';
+
 import MovieList from './MovieList';
 import MovieDetail from './MovieDetail';
 import NavBar from './NavBar';
@@ -15,6 +16,8 @@ import ComedyPage from './ComedyPage';
 import ProfilePage from './ProfilePage';
 import BookmarkPage from './BookmarkPage';
 import AllMoviesPage from './AllMoviesPage';
+import { isAuthenticated } from './Utils'; // Importă funcția isAuthenticated
+
 
 const AppRoutes = () => {
   const [movies, setMovies] = useState(moviesData);
@@ -47,10 +50,12 @@ const AppRoutes = () => {
           <Route path="/action" element={<ActionPage />} />
           <Route path="/comedy" element={<ComedyPage />} />
           <Route path="/signup" element={<SignUpForm />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/bookmark" element={<BookmarkPage />} />
+         
+   
           <Route path="/allmovies" element={<AllMoviesPage />} />
           <Route path="/movies/:id/add-review" element={<AddReview movies={movies} />} />
+          <Route path="/profile" element={isAuthenticated() ? <ProfilePage /> : <LoginForm />} />
+          <Route path="/bookmark" element={isAuthenticated() ? <BookmarkPage /> : <LoginForm />} />
         </Routes>
       </div>
     </Router>

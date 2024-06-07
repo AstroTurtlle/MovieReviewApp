@@ -19,17 +19,19 @@ import { OverlayTrigger } from 'react-bootstrap'
 
 
   return (
-    <Link to={`/movies/${movie.id}/add-review`} className="movie-card-link">
+    
       <div className="movie-card">
-        <img className='card-img' src={(movie.imageBGposter)} alt={movie.title} />
-        <OverlayTrigger placement="top" delay={{ show: 250, hide: 0 }} overlay={bookmark ? tooltip_Bookmark : tooltip_Remove}>
+      <OverlayTrigger placement="top" delay={{ show: 250, hide: 0 }} overlay={bookmark ? tooltip_Bookmark : tooltip_Remove}>
         <div className='bookmark-film'>
-            <i className='fas fa-bookmark bookmark' style={{display: bookmark ? '' : 'none'}}>
+            <i className='fas fa-bookmark bookmark' style={{display: bookmark ? '' : 'none'}} >
             </i>
             <i className='fas fa-times bookmark' style={{display: bookmark ? 'none' : ''}}>
             </i>
         </div>
         </OverlayTrigger >
+        <Link to={`/movies/${movie.id}/add-review`} className="movie-card-link" style={{ textDecoration: "none" }}>
+        <img className='card-img' src={(movie.imageBGposter)} alt={movie.title} />
+
         <div className='rating-box'>
            <i className='fas fa-star mr-1 star'></i>
            {movie.rating.toFixed(1)}
@@ -37,9 +39,9 @@ import { OverlayTrigger } from 'react-bootstrap'
         <div className="movie-card-content">
           <h2 className='card-title'>{movie.title}</h2>
         </div>
-        
+        </Link>
       </div>
-    </Link>
+    
   );
 };
 
