@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "password",
-  database: "dbtest"
+  password: "root",
+  database: "MovieReview"
 });
 
 connection.connect(function(err) {
@@ -108,7 +108,62 @@ app.post('/reviews', (req, res) => {
           res.status(200).send("Review inserted successfully.");
       }
   })});
+
+
+  app.get('/otherReviews', (req, res) => {
+    const movieId = req.query.movieId;
+
+    if (!movieId) {
+        return res.status(400).send("Movie ID is required");
+    }
+
+    const queryString = "SELECT reviewId, rating, userID, review, reviewDate FROM reviews WHERE movieId = ?";
+    const values = [movieId];
+
+    connection.query(queryString, values, function (err, results) {
+        if (err) {
+            console.error("An error occurred:", err);
+            return res.status(500).send("An error occurred while fetching reviews.");
+        }
+
+        if (results.length > 0) {
+            // Salvăm valorile din primul rând al rezultatelor în variabile separate
+            const { rating, userID, review, reviewDate } = results[0];
+            
+           for(i=0;i<results.length;i++){
+            console.log("raspuns:", results[i]);
+            const { rating, userID, review, reviewDate } = results[i];
+           }
+console.log("rating",rating);
+            // Întoarce rezultatele sau variabilele într-un răspuns JSON
+            return res.status(200).json({
+                message: "Reviews fetched successfully",
+                reviews: results,
+              
+            });
+        } else {
+            return res.status(404).send("No reviews found for the given movie ID");
+        }
+    });
+});
+
 //////////
+
+app.get('/userinfo', (req, res) => {
+  const { userId } = req.query;
+  const query = 'SELECT userName FROM Users WHERE userId = ?';
+  connection.query(query, [userId], (err, result) => {
+    if (err) {
+      console.error('eroare la afisarea informatiilor:', err);
+      res.status(500).send('eroare la afisarea informatiilor');
+    }else {
+      console.log('informatiile au fost afisate cu succes');
+      res.status(200).send(result);
+    }
+  });
+});
+
+
 
 //API for getting max 10 names of movies associated with the search query through the api
 app.get('/search', async function (request, response) {

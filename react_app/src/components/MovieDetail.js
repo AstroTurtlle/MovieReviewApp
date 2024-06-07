@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import movies from '../data/movies';
 import AddReview from './AddReview';
+import axios from 'axios'
 
 const MovieDetail = () => {
   const { id } = useParams();
