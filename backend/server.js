@@ -28,13 +28,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.post("/register", function(req, res) {
   const reqBody = req.body;
-  const name = reqBody.username;
-  const email = reqBody.email;
-  const password = reqBody.password;
+  const userName = reqBody.userName;
+  const userEmail = reqBody.userEmail;
+  const userPassword = reqBody.userPassword;
 
   // Register
-  const queryString = "INSERT INTO Users (userName, userEmail, userPassword) VALUES (?, ?, ?)";
-  const values = [name, email, password];
+  const queryString = "INSERT INTO users (userName, userPassword, userEmail) VALUES (?, ?, ?)";
+  const values = [userName, userPassword, userEmail];
 
   connection.query(queryString, values, function (err, result) {
       if (err) {
@@ -51,11 +51,11 @@ app.post("/register", function(req, res) {
 
 //Login
 app.post("/login", function(req, res) {
-  const { username, password } = req.body;
+  const { userName, userPassword } = req.body;
 
   // Query to check if the username and password match
-  const queryString = "SELECT * FROM Users WHERE userName = ? AND userPassword = ?";
-  const values = [username, password];
+  const queryString = "SELECT * FROM users WHERE userName = ? AND userPassword = ?";
+  const values = [userName, userPassword];
 
   connection.query(queryString, values, function(err, results) {
       if (err) {
@@ -65,8 +65,8 @@ app.post("/login", function(req, res) {
           if (results.length > 0) {
               // User authenticated, generate and send token
               const user = results[0];
-              const token = jwt.sign({ id: user.id, username: user.name }, secretKey, { expiresIn: '1h' });
-              res.status(200).json({ message: "Login successful", token });
+              const token = jwt.sign({ id: user.userId, username: user.userName }, secretKey, { expiresIn: '1h' });
+              res.status(200).json({ message: "Login successful", token,userId:user.userId });
           } else {
               // User not found or invalid credentials, send error response
               res.status(401).send("Invalid username or password");
@@ -92,6 +92,23 @@ app.get('/protected', authenticateToken, (req, res) => {
   res.status(200).json({ message: 'Ai acces la această rută protejată', user: req.user });
 });
 /////////////////////
+app.post('/reviews', (req, res) => {
+  const { rating, userId, movieId, review, reviewDate } = req.body;
+  const queryString = "INSERT INTO Reviews (rating, userId, movieId, review, reviewDate) VALUES (?, ?, ?, ?, ?)";
+  const values = [rating, userId, movieId, review, reviewDate];
+
+  connection.query(queryString, values, function(err, result) {
+      if (err) {
+          console.error("An error occurred:", err);
+          // Send an error response to the client
+          res.status(500).send("An error occurred while inserting review into the database.");
+      } else {
+          console.log("Review successfully inserted into the database");
+          // Send a success response to the client
+          res.status(200).send("Review inserted successfully.");
+      }
+  })});
+//////////
 
 //API for getting max 10 names of movies associated with the search query through the api
 app.get('/search', async function (request, response) {
@@ -139,21 +156,7 @@ app.delete('/user/films/:userId/:movieId', (req, res) => {
   });
 });
 
-app.post('/reviews', (req, res) => {
-  const { rating, userId, movieId, review, reviewDate } = req.body;
-  const query = 'INSERT INTO Reviews (rating, userId, movieId, review, reviewDate) VALUES (?, ?, ?, ?, ?)';
-  db.query(query, [rating, userId, movieId, review, reviewDate], (err, result) =>{
 
-  
-    if(err) {
-      console.error('eroare la adaugarea recenziei:',err);
-      result.status(500).send('eroare la adaugarea recenziei');
-    }else {
-      console.log("recenzia a fost adaugata cu succes");
-      result.status(201).send('recenzia a fost adaugata cu succes');
-    }
-  });
-});
 
 app.listen(PORT, () => {
 console.log(`Express server running at http://localhost:${PORT}/`);

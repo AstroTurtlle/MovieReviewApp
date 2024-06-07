@@ -23,7 +23,7 @@ const HomePage=() => {
                     </MovieList>
                 </div>
                 <div className="link_All_Movies">
-                    <Link to="/allmovies" className="link_all_movies_design">All Movies</Link>
+                    <Link to="/allmovies" className="link_all_movies_design" style={{ textDecoration: "none", color:'#ffffff' }}>All Movies</Link>
                 </div>
             </div>
         </div>
