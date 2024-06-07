@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import  { useEffect } from "react";
+import movies from '../data/movies';
 
 const AddReview = ({ movies }) => {
   const { id } = useParams();
@@ -63,9 +64,8 @@ const AddReview = ({ movies }) => {
     }
   };
 
-
-/////pentru a afisa reviews
 useEffect(() => {
+  
   const fetchReviews = async () => {
       try {
           const response = await axios.get(`http://localhost:8080/otherReviews?movieId=${id}`, {
@@ -75,17 +75,28 @@ useEffect(() => {
           });
 
           if (response.status === 200) {
-              const reviewsData = response.data.reviews;
+              const reviewsData = response.data;
               setReviews(reviewsData); // Setează recenziile preluate
 
               // Pentru fiecare recenzie, obține numele utilizatorului asociat
               reviewsData.forEach(review => {
-                  fetchUserInfo(review.userId);
+                  const fetchUserInfo = axios.get('http://localhost:8080/userinfo', {
+                    params: { userId: review.userID }
+                  });
+                  Promise.all([fetchUserInfo]).then((responses) => {
+                    const userInfoResponse = responses[0];
+        
+                    if (!userInfoResponse.data.error) {
+                      review.userName = userInfoResponse.data[0].userName;
+                    } else {
+                        console.log("No results found for user info");
+                    }
+                  });
               });
           }
       } catch (error) {
           console.error('Error fetching reviews:', error);
-          alert('Failed to fetch reviews: ' + error.message);
+          //alert('Failed to fetch reviews: ' + error.message);
       }
   };
 
@@ -93,23 +104,7 @@ useEffect(() => {
 }, [id]);
 
 // Funcția pentru a obține numele utilizatorului asociat unui ID de utilizator
-const fetchUserInfo = async (userId) => {
-  try {
-      const userInfoResponse = await axios.get(`http://localhost:8080/userInfo?userId=${userId}`, {
-          headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-      });
 
-      if (userInfoResponse.status === 200) {
-          const userName = userInfoResponse.data; // Obține numele utilizatorului
-          setUsersName(userName); // Setează numele utilizatorului în stare
-      }
-  } catch (error) {
-      console.error('Error fetching user info:', error);
-      throw new Error('Failed to fetch user info: ' + error.message);
-  }
-};
 
 ///////////
 
@@ -190,7 +185,7 @@ const fetchUserInfo = async (userId) => {
                         <li key={index} className="review">
                             <div className='review-user-content'>
                                 <div className='review-username'>
-                                    <h4>{index+1}</h4>
+                                    <h4>{review.userName}</h4>
                                 </div>
                                 <div className='review-rating'>
                                     <div className="stars">

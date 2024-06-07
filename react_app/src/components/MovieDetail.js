@@ -7,6 +7,8 @@ import axios from 'axios'
 const MovieDetail = () => {
   const { id } = useParams();
   const movie = movies.find(movie => movie.id === parseInt(id));
+  console.log("aaa", id);
+  const v = 3;
 
   return (
     <div className="movie-detail">
@@ -22,7 +24,7 @@ const MovieDetail = () => {
           </li>
         ))}
       </ul>
-      <AddReview movieId={movie.id} />
+      <AddReview movieId={v} />
     </div>
   );
 };

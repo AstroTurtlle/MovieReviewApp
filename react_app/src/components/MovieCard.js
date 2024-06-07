@@ -5,9 +5,7 @@ import { OverlayTrigger } from 'react-bootstrap'
 import axios from 'axios';
 
   const MovieCard = ({ movie, bookmark }) => {
-
   const userId = localStorage.userId;
-  //const [isBookmarked, setIsBookmarked] = useState(bookmark);
   
   const handleBookmark = async () => {
     try {
@@ -53,6 +51,7 @@ import axios from 'axios';
 
 
   return (
+    <Link to={`/movies/${movie.movieId}/add-review`} className="movie-card-link">
     <div className="movie-card">
       <OverlayTrigger placement="top" delay={{ show: 250, hide: 0 }} overlay={bookmark ? tooltip_Remove : tooltip_Bookmark}>
         <div className='bookmark-film' onClick={bookmark ? handleRemoveBookmark : handleBookmark}>
@@ -60,7 +59,6 @@ import axios from 'axios';
           <i className='fas fa-times bookmark' style={{ display: bookmark ? '' : 'none' }}></i>
         </div>
       </OverlayTrigger>
-      <Link to={'/movies/${movie.id}/add-review'} className="movie-card-link" style={{ textDecoration: "none" }}>
         <img className='card-img' src={movie.imageBGposter} alt={movie.title} />
         <div className='rating-box'>
           <i className='fas fa-star mr-1 star'></i>
@@ -69,8 +67,8 @@ import axios from 'axios';
         <div className="movie-card-content">
           <h2 className='card-title'>{movie.title}</h2>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

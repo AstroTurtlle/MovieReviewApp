@@ -26,11 +26,11 @@ const HomePage=() => {
                 console.log("No results found for user films");
             }
 
-            setLoading(false); // Step 2: Set loading to false after fetching data
+            setLoading(false);
         });
     }, []);
 
-    if (loading) { // Step 3: Conditional rendering based on loading state
+    if (loading) {
         return <div>Loading...</div>;
     }
 
@@ -38,12 +38,12 @@ const HomePage=() => {
         <div>
         <SwiperBig movies={moviesData}>
         </SwiperBig>
-        <SwiperSmall category={category} movies={moviesData}>
+        <SwiperSmall category={category} movies={movieData}>
         </SwiperSmall>
             <div className="More_Movies"> 
                 <h1 className="More_Movies_left_aligned">More Movies</h1>
                 <div className="Movie_list_More_Movies">
-                    <MovieList movies={more_movies_displaying}  bookmark={false}>
+                    <MovieList movies={movieData}  bookmark={false}>
                     </MovieList>
                 </div>
                 <div className="link_All_Movies">

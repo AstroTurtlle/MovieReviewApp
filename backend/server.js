@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "root",
-  database: "MovieReview"
+  password: "password",
+  database: "dbtest"
 });
 
 connection.connect(function(err) {
@@ -127,20 +127,8 @@ app.post('/reviews', (req, res) => {
         }
 
         if (results.length > 0) {
-            // Salvăm valorile din primul rând al rezultatelor în variabile separate
-            const { rating, userID, review, reviewDate } = results[0];
-            
-           for(i=0;i<results.length;i++){
-            console.log("raspuns:", results[i]);
-            const { rating, userID, review, reviewDate } = results[i];
-           }
-console.log("rating",rating);
-            // Întoarce rezultatele sau variabilele într-un răspuns JSON
-            return res.status(200).json({
-                message: "Reviews fetched successfully",
-                reviews: results,
-              
-            });
+          console.log(results);
+            res.status(200).send(results);
         } else {
             return res.status(404).send("No reviews found for the given movie ID");
         }
@@ -219,20 +207,21 @@ app.get('/user/films',(req, res) =>{
     if(err) {
       console.err('eroare la adaugarea filmului:',err);
       res.status(500).send('eroare la adaugarea filmului');
-    }else {
-      movieIds = result.map((item) => item.movieId);
-      const query2 = 'SELECT * FROM Movies WHERE movieId IN (?)';
-      connection.query(query2, [movieIds], (err, result) =>{
-        if(err) {
-          console.err('eroare la adaugarea filmului:',err);
-          res.status(500).send('eroare la adaugarea filmului');
-        }else {
-          console.log('filmele au fost afisate cu succes');
-          res.status(200).send(result);
-        }
+    }else
+      if(result.length > 0) {
+        movieIds = result.map((item) => item.movieId);
+        const query2 = 'SELECT * FROM Movies WHERE movieId IN (?)';
+        connection.query(query2, [movieIds], (err, result) =>{
+          if(err) {
+            console.log('eroare la adaugarea filmului:',err);
+            res.status(500).send('eroare la adaugarea filmului');
+          }else {
+            console.log('filmele au fost afisate cu succes');
+            res.status(200).send(result);
+          }
+        });
+      }
       });
-    }
-  });
 });
 
 app.get('/allfilms', (req, res) => {

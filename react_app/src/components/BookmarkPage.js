@@ -32,6 +32,8 @@ const BookmarkPage = () => {
 
             if (!userInfoResponse.data.error) {
                 setuserName(userInfoResponse.data[0].userName);
+                console.log("dataaa", userInfoResponse.data);
+                console.log("userName ", userName);
             } else {
                 console.log("No results found for user info");
             }
