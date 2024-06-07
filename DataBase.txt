@@ -1,26 +1,27 @@
---Create database MovieReview
---
+#Create database MovieReview
+
 create table Movies 
 ( 
-	movieId int primary key,
+	movieId int primary key AUTO_INCREMENT,
 	title varchar(60),
 	releaseDate date,
 	director varchar(60),
 	category varchar(60),
 	movieDescription varchar(1000)		
-)
---
+);
+
 create table Users 
 ( 
-	userId int primary key,
-	userName varchar(60),
+	userId int primary key AUTO_INCREMENT,
+	userName varchar(60) NOT NULL,
 	userPassword varchar(15),
 	userEmail varchar(60),
-)
---
+	CONSTRAINT name_unique UNIQUE (userName)
+);
+
 create table Reviews 
 ( 
-	reviewId int primary key,
+	reviewId int primary key AUTO_INCREMENT,
 	rating int,
 	userId int,
 	movieId int,
@@ -28,11 +29,24 @@ create table Reviews
 	reviewDate date,
 	foreign key (userId) references Users(userId),
 	foreign key (movieId) references Movies(movieId)
-)
+);
+
 create table UsersFilms (
-	userFilmId int primary key,
+	userFilmId int primary key AUTO_INCREMENT,
 	userId int,
 	movieId int,
 	foreign key (userId) references Users(userId),
 	foreign key (movieId) references Movies(movieId)
-)
+);
+
+INSERT INTO movies (title, releaseDate, director, category, movieDescription) VALUES
+('Inception', '2010-07-16', 'Christopher Nolan', 'Sci-Fi', 'A thief who steals corporate secrets through the use of dream-sharing technology.'),
+('The Matrix', '1999-03-31', 'The Wachowskis', 'Sci-Fi', 'A computer hacker learns about the true nature of his reality.'),
+('Interstellar', '2014-11-07', 'Christopher Nolan', 'Sci-Fi', 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.'),
+('The Dark Knight', '2008-07-18', 'Christopher Nolan', 'Action', 'When the menace known as The Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.'),
+('Pulp Fiction', '1994-10-14', 'Quentin Tarantino', 'Crime', 'The lives of two mob hitmen, a boxer, and a pair of diner bandits intertwine in four tales of violence and redemption.'),
+('Fight Club', '1999-10-15', 'David Fincher', 'Drama', 'An insomniac office worker and a soap salesman form an underground fight club.'),
+('Forrest Gump', '1994-07-06', 'Robert Zemeckis', 'Drama', 'The presidencies of Kennedy and Johnson, the Vietnam War, and other historical events unfold from the perspective of an Alabama man with an IQ of 75.'),
+('The Godfather', '1972-03-24', 'Francis Ford Coppola', 'Crime', 'The aging patriarch of an organized crime dynasty transfers control of his empire to his reluctant son.'),
+('The Shawshank Redemption', '1994-09-23', 'Frank Darabont', 'Drama', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.'),
+('The Lord of the Rings: The Fellowship of the Ring', '2001-12-19', 'Peter Jackson', 'Fantasy', 'A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring.');
