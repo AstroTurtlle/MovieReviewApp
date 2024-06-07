@@ -45,11 +45,3 @@
     align-items: center;
   }
   
-  .search-bar {
-    margin:0 auto; 
-  }
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }

@@ -75,6 +75,27 @@ const NavBar = ({ onSearch }) => {
       <div className='nav-home-button'>
         <Link to="/" onClick={HomeclickHandle}>Home</Link>
       </div>
+      {isAuthenticated() ? (
+          <>
+          <div className='nav-profile-button' style={{display:'block'}}>
+            <Link to="/profile">Profile</Link> 
+          </div>
+          <div className='nav-bookmarks-button' style={{display:'block'}}>
+            <Link to="/bookmark">Bookmarks</Link>
+          </div>
+          </>
+        ) : (
+          <>
+          <div className='nav-profile-button'  style={{display:'none'}}>
+            <Link to="/profile">Profile</Link> 
+          </div>
+          <div className='nav-bookmarks-button' style={{display:'none'}}>
+            <Link to="/bookmark">Bookmarks</Link>
+          </div>
+          <div className='spatiu1'></div>
+          <div className='spatiu2'></div>
+          </>
+        )}
       <div className="search-bar">
         <input
           type="text"
@@ -88,17 +109,28 @@ const NavBar = ({ onSearch }) => {
       <div className="login-profile">
         {isAuthenticated() ? (
           <>
-            <Link to="/profile">Profile</Link> 
-            <Link to="/bookmark">Bookmarks</Link>
-            <button onClick={handleLogout}>Logout</button>
+            <div className='spatiu3'></div>
+              <div className='nav-login-button' style={{display:'none'}}>
+              <Link to="/login">Login</Link>
+            </div>
+            <div className='nav-signup-button' style={{display:'none'}}>
+              <Link to="/signup">Sign Up</Link>
+            </div>
+            <div className='nav-logout-button' onClick={handleLogout} style={{display:'block'}}>Logout</div>
           </>
         ) : (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
+
+                      <div className='spatiu4'></div>
+                      <div className='nav-logout-button' onClick={handleLogout} style={{display:'none'}}>Logout</div>
+            <div className='nav-login-button' style={{display:'block'}}>
+              <Link to="/login">Login</Link>
+            </div>
+            <div className='nav-signup-button' style={{display:'flex'}}>
+              <Link to="/signup">Sign Up</Link>
+            </div>
           </>
         )}
-        <ProfileIcon />
       </div>
     </nav>
   );
