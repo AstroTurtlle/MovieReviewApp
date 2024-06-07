@@ -50,12 +50,6 @@ export const  LoginForm = () => {
                         <TextField type="password" placeholder='Password' id='password'sx={{border: 'none',"& fieldset": { border: 'none' },}} onChange={changePassword} required></TextField>
                         <FaLock className='icon'/>
                     </div>
-                    <div className="remember-forgot">
-                        <label>
-                            <TextField type="checkbox" sx={{border: 'none',"& fieldset": { border: 'none' },}}  />Keep me logged in
-                        </label>
-                        <a href="#"> Forgot password? </a>
-                    </div>
                     <button type="submit" onClick={submit}>Login</button>
                     <div className="register-link">
                         <p>

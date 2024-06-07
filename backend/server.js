@@ -207,6 +207,34 @@ app.get('/userinfo', (req, res) => {
   });
 });
 
+app.post('/edit/:userId/:userName', (req, res) => {
+  const { userId, userName } = req.params;
+  const query = 'UPDATE Users SET userName = ? WHERE userId = ?';
+  connection.query(query, [userName, userId], (err, result) => {
+    if (err) {
+      console.error('eroare la editarea informatiilor:', err);
+      res.status(500).send('eroare la editarea informatiilor');
+    }else {
+      console.log('informatiile au fost editate cu succes');
+      res.status(200).send('informatiile au fost editate cu succes');
+    }
+  });
+});
+
+app.post('/editpass/:userId/:password', (req, res) => {
+  const { userId, password } = req.params;
+  const query = 'UPDATE Users SET userPassword = ? WHERE userId = ?';
+  connection.query(query, [password, userId], (err, result) => {
+    if (err) {
+      console.error('eroare la editarea informatiilor:', err);
+      res.status(500).send('eroare la editarea informatiilor');
+    }else {
+      console.log('informatiile au fost editate cu succes');
+      res.status(200).send('informatiile au fost editate cu succes');
+    }
+  });
+});
+
 app.listen(PORT, () => {
 console.log(`Express server running at http://localhost:${PORT}/`);
 });

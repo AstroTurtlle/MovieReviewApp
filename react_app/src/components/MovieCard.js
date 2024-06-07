@@ -31,7 +31,6 @@ import axios from 'axios';
       const response = await axios.delete(`http://localhost:8080/user/films/${userId}/${movie.movieId}`);
       if (response.status === 200) {
         console.log('Film removed from user\'s list successfully');
-        //setIsBookmarked(false); // Update the state to reflect the removal
       } else {
         console.log('Failed to remove film from user\'s list');
       }

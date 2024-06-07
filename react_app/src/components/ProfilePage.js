@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
+import axios from 'axios';
 
 const ProfilePage = () => {
 
@@ -8,16 +9,116 @@ const ProfilePage = () => {
     const onClickHide = () => setChangePassHidden(!isChangePassHidden);
 
     const [isActive, setisActive] = useState(false);
+    
+    const userId = localStorage.getItem('userId');
+    const [loading, setLoading] = useState(true);
+    const [userName, setuserName] = useState('');
+    const [userEmail, setuserEmail] = useState('');
+    const [userPass, setuserPass] = useState('');
+    const currentDate = new Date().toLocaleDateString();
+    const userNameInputRef = useRef(null);
+    const currentPassInputRef = useRef(null);
+    const newPassInputRef = useRef(null);
+    const confirmPassInputRef = useRef(null);
+    const [passwordError, setPasswordError] = React.useState(false);
+    const [currpasswordError, setCurrPasswordError] = React.useState(false);
+    const [usernameError, setUsernameError] = React.useState(false);
+    const [passwordFormatError, setPasswordFormatError] = React.useState(false);
 
-    const handleClickChange = () => {
-        setisActive(isActive => !isActive)
+    function changeUsername(event) {
+        const value = event.target.value;
+        if (
+            value.length > 15 ||
+            /\s/.test(value) ||
+            /[,\.<>\[\]{};:'"?\/\\|!~`]/.test(value)
+        ) {
+            setUsernameError(true);
+        } else {
+            setUsernameError(false);
+        }
     }
+
+    function changePassword(event) {
+        const value = event.target.value;
+        if (
+            !/(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])(?!.*[<>\/\\|{}[\];:'"?\-+~\s])[A-Za-z\d!@#$%^&*()_+]{8,}/.test(value)
+        ) {
+            setPasswordFormatError(true);
+        } else {
+            setPasswordFormatError(false);
+        }
+    }
+
+    useEffect(() => {
+        const fetchUserInfo = axios.get('http://localhost:8080/userinfo', {
+            params: { userId: userId }
+        });
+
+        Promise.all([fetchUserInfo]).then((responses) => {
+            const userInfoResponse = responses[0];
+
+            if (!userInfoResponse.data.error) {
+                setuserName(userInfoResponse.data[0].userName);
+                setuserEmail(userInfoResponse.data[0].userEmail);
+                setuserPass(userInfoResponse.data[0].userPassword);
+            } else {
+                console.log("No results found for user info");
+            }
+
+            setLoading(false);
+        });
+    }, []);
+
+    async function handleClickChange() {
+        if(isChangePassHidden) {
+            if(userPass != currentPassInputRef.current.value) {
+                setCurrPasswordError(true);
+            } else {
+                setCurrPasswordError(false);
+                if(newPassInputRef.current.value != confirmPassInputRef.current.value) {
+                    setPasswordError(true);
+                } else {
+                    setPasswordError(false);
+                    if(newPassInputRef.current.value != '') {
+                        try {
+                            const response = await axios.post(`http://localhost:8080/editpass/${userId}/${newPassInputRef.current.value}`);
+                            if (response.status === 200) {
+                            console.log('User updated succesfully');
+                            } else {
+                            console.log('Failed to update user');
+                            }
+                        } catch (error) {
+                            console.error('Error updating user', error);
+                        }
+                    }
+                }
+            }
+        }
+        if(userName != userNameInputRef.current.value && userNameInputRef.current.value != '') {
+            setuserName(userNameInputRef.current.value);
+            try {
+                const response = await axios.post(`http://localhost:8080/edit/${userId}/${userNameInputRef.current.value}`);
+                if (response.status === 200) {
+                console.log('User updated succesfully');
+                } else {
+                console.log('Failed to update user');
+                }
+            } catch (error) {
+                console.error('Error updating user', error);
+            }
+        }
+    }
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return(
         <div className='pagina-profil-full'>
         <div className='pagina-profil'>
             <div className='profil-header'>
                 <div className='container-profil-header'>
-                    <div className='ph-titlu'>Hello, Drwpa</div>
+                    <div className='ph-titlu'>Hello, {userName}</div>
                     <div className='ph-nav'>
                         <ul className='nav-bar'>
                             <li className='nav-item'>
@@ -50,19 +151,19 @@ const ProfilePage = () => {
                                 <div className='col-xl-12 col-lg-12 col-md-12'>
                                     <div className='form-group'>
                                     <label className='form-label'>Email address</label>
-                                        <input type='email' class='control-form' disabled readOnly value={"50Cent@whyyoufackmefor.com"}></input>
+                                        <input type='email' class='control-form' disabled readOnly value={userEmail}></input>
                                     </div>
                                 </div>
                                 <div className='col-xl-12 col-lg-12 col-md-12'>
                                     <div className='form-group'>
                                     <label className='form-label'>Username</label>
-                                        <input type='' class='control-form' required defaultValue={"50Cent"}></input>
+                                        <input type='' class='control-form' required defaultValue={userName} ref={userNameInputRef} onChange={changeUsername}></input>
                                     </div>
                                 </div>
                                 <div className='col-xl-12 cl-lg-12 col-md-12'>
                                     <div className='form-group'>
                                     <label className='form-label'>Join date</label>
-                                        <input type='text' class='control-form' disabled value={"Old ASF"}></input>
+                                        <input type='text' class='control-form' disabled value={currentDate}></input>
                                     </div>
                                 </div>
                                 <div className='col-xl-12 cl-lg-12 col-md-12'>
@@ -74,15 +175,15 @@ const ProfilePage = () => {
                                         <div id='show-changepass' className='mt-3' >
                                             <div className='form-group'>
                                             <label className='form-label'>Curent password</label>
-                                                <input type='password' class='control-form' required></input>   
+                                                <input type='password' class='control-form' required ref={currentPassInputRef}></input>   
                                             </div>
                                             <div className='form-group'>
                                             <label className='form-label'>New password</label>
-                                                <input type='password' class='control-form' required></input>   
+                                                <input type='password' class='control-form' required ref={newPassInputRef} onChange={changePassword}></input>   
                                             </div>
                                             <div className='form-group'>
                                             <label className='form-label'>Confirm new password</label>
-                                                <input type='password' class='control-form' required></input>   
+                                                <input type='password' class='control-form' required ref={confirmPassInputRef} ></input>   
                                             </div>
                                         </div>
                                     </Collapse>
@@ -90,10 +191,27 @@ const ProfilePage = () => {
                                 <div className='col-xl-12 col-lg-12 col-md-12'>
                                         <div class='form-group'>
                                             <div className='mt-4'>
-                                                <button class='btn-save' style={{backgroundColor: isActive ? '#979797' : '', color: isActive ? '#333' : ''}} onMouseDown={handleClickChange} onMouseUp={handleClickChange}>Save</button>
+                                                { passwordFormatError ? (
+                                                <button class='btn-save' onClick={handleClickChange}>Save</button>
+                                                ):(
+                                                <button disabled class='btn-save' style={{backgroundColor: '#A9A9A9'}} onClick={handleClickChange}>Save</button>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
+
+                                    { passwordError ? (
+                                    <div style={{ color: 'red' }}>Error: Passwords do not match</div>
+                                    ):(null)}
+                                    { currpasswordError ? (
+                                    <div style={{ color: 'red' }}>Error: Incorrect password</div>
+                                    ):(null)}
+                                    { passwordFormatError ? (
+                                    <div style={{ color: 'red' }}>Error: Password format is incorrect</div>
+                                    ):(null)}
+                                    { usernameError ? (
+                                    <div style={{ color: 'red' }}>Error: Incorrect password</div>
+                                    ):(null)}
                             </div>
                         </div>
                     </div>

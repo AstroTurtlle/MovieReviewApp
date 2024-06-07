@@ -6,7 +6,7 @@ const movies = [
     imageUrl: "https://via.placeholder.com/150?text=Inception",
     imageBGposter: require('../assets/inception-poster.jpg'),
     imageBGbanner: require('../assets/inception-banner.jpg'),
-    rating: 4.8,
+    rating: 1,
     reviews: [
       { username: "Alice", content: "Amazing movie with a complex plot!", reviewrating: 5 },
       { username: "Bob", content: "A bit hard to follow, but worth it.", reviewrating: 5 },
@@ -22,7 +22,7 @@ const movies = [
     imageUrl: "https://via.placeholder.com/150?text=The+Matrix",
     imageBGposter: require("../assets/the-matrix-poster.jpg"),
     imageBGbanner: require('../assets/the-matrix-banner.jpg'),
-    rating: 3.6,
+    rating: 1,
     reviews: [
       { username: "Charlie", content: "A groundbreaking sci-fi movie.", reviewrating: 5 },
       { username: "Dave", content: "Action-packed and thought-provoking.", reviewrating: 5 },
@@ -38,7 +38,7 @@ const movies = [
     imageUrl: "https://via.placeholder.com/150?text=Interstellar",
     imageBGposter: require('../assets/interstellar-poster.jpg'),
     imageBGbanner: require('../assets/interstellar-banner.jpg'),
-    rating: 4.7,
+    rating: 1,
     reviews: [
       { username: "Eve", content: "A visually stunning and emotional journey.", reviewrating: 4 },
       { username: "Frank", content: "Complex and deeply moving.", reviewrating: 5 },
@@ -54,7 +54,7 @@ const movies = [
     imageUrl: "https://via.placeholder.com/150?text=The+Dark+Knight",
     imageBGposter: require('../assets/the-dark-knight-poster.jpg'),
     imageBGbanner: require('../assets/the-dark-knight-banner.jpg'),
-    rating: 4.1,
+    rating: 1,
     reviews: [
       { username: "Grace", content: "An exceptional superhero movie.", reviewrating: 5 },
       { username: "Hank", content: "Heath Ledger's performance is legendary.", reviewrating: 5 },
@@ -70,7 +70,7 @@ const movies = [
     imageUrl: "https://via.placeholder.com/150?text=Pulp+Fiction",
     imageBGposter: require('../assets/pulp-fiction-poster.jpg'),
     imageBGbanner: require('../assets/pulp-fiction-banner.jpg'),
-    rating: 4.4,
+    rating: 1,
     reviews: [
       { username: "Ivy", content: "A classic Tarantino film with a unique style.", reviewrating: 5 },
       { username: "Jack", content: "Brilliant dialogue and storytelling.", reviewrating: 5 },
@@ -86,7 +86,7 @@ const movies = [
     imageUrl: "https://via.placeholder.com/150?text=Fight+Club",
     imageBGposter: require('../assets/fight-club-poster.jpg'),
     imageBGbanner: require('../assets/fight-club-banner.jpg'),
-    rating: 5,
+    rating: 1,
     reviews: [
       { username: "Karen", content: "A thought-provoking and intense movie.", reviewrating: 5 },
       { username: "Leo", content: "Twists and turns that keep you engaged.", reviewrating: 5 },
@@ -102,7 +102,7 @@ const movies = [
     imageUrl: "https://via.placeholder.com/150?text=Forrest+Gump",
     imageBGposter: require('../assets/forrest-gump-poster.jpg'),
     imageBGbanner: require('../assets/forrest-gump-banner.jpg'),
-    rating: 4,
+    rating: 1,
     reviews: [
       { username: "Mona", content: "Heartwarming and inspiring.", reviewrating: 5 },
       { username: "Nick", content: "Tom Hanks delivers a fantastic performance.", reviewrating: 5 },
@@ -118,7 +118,7 @@ const movies = [
     imageUrl: "https://via.placeholder.com/150?text=The+Godfather",
     imageBGposter: require('../assets/the-godfather-poster.jpg'),
     imageBGbanner: require('../assets/the-godfather-banner.jpg'),
-    rating: 5,
+    rating: 1,
     reviews: [
       { username: "Olivia", content: "A masterpiece of cinema.", reviewrating: 5 },
       { username: "Paul", content: "An epic tale of family and power.", reviewrating: 5 },
@@ -134,7 +134,7 @@ const movies = [
     imageUrl: "https://via.placeholder.com/150?text=The+Shawshank+Redemption",
     imageBGposter: require('../assets/the-shawshank-redemption-poster.jpg'),
     imageBGbanner: require('../assets/the-shawshank-redemption-banner.jpg'),
-    rating: 4.8,
+    rating: 1,
     reviews: [
       { username: "Quinn", content: "An uplifting story of hope and friendship.", reviewrating: 5 },
       { username: "Rita", content: "One of the best films ever made.", reviewrating: 5 },
@@ -150,7 +150,7 @@ const movies = [
     imageUrl: "https://via.placeholder.com/150?text=LOTR",
     imageBGposter: require('../assets/the-lord-of-the-rings-the-fellowship-of-the-ring-poster.jpg'),
     imageBGbanner: require('../assets/the-lord-of-the-rings-the-fellowship-of-the-ring-banner.jpg'),
-    rating: 5,
+    rating: 1,
     reviews: [
       { username: "Sam", content: "An epic fantasy adventure.", reviewrating: 5 },
       { username: "Tina", content: "A visually stunning and engaging film.", reviewrating: 5 },
