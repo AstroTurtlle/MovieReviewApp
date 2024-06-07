@@ -31,6 +31,7 @@ export const SignUpForm = () => {
     }
     
     function submit(event) {
+        event.preventDefault();
         if (userEmail!="" && userPassword!=""  && userName!="" && rePassword === userPassword)
             axios.post("http://localhost:8080/register", {
                 userName: userName,

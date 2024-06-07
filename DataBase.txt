@@ -1,4 +1,4 @@
-Create database MovieReview
+#Create database MovieReview
 
 create table Movies 
 ( 
