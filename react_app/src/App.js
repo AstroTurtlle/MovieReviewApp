@@ -10,10 +10,15 @@ function App() {
 
 export default App;*/
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppRoutes from './components/Router';
 
 function App() {
+  useEffect(() => {
+    // Clear localStorage
+    // localStorage.clear();
+  }, []);
+
   return <AppRoutes />;
 }
 

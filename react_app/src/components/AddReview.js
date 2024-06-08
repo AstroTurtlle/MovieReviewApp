@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import  { useEffect } from "react";
-import movies from '../data/movies';
 
 const AddReview = ({ movies }) => {
   const { id } = useParams();
-  const movie = movies.find(movie => movie.id === parseInt(id));
+  const movie = movies[id-1];
+  const imagePath = `${process.env.PUBLIC_URL}/${movie.imageBGposter}`;
   const [userRating, setUserRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
@@ -113,6 +113,7 @@ useEffect(() => {
 
 /////pentru rating
   const renderStars = (rating, setRating) => {
+    console.log("rating ", rating);
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       const fillPercentage = Math.min(Math.max(rating - (i - 1), 0), 1) * 100;
@@ -136,7 +137,7 @@ useEffect(() => {
     <div className="add-review">
       <header className='header-add-review'>
         <div className='add-review-poster-container'>
-          <img className='add-review-poster' src={movie.imageBGposter} alt={movie.title} />
+          <img className='add-review-poster' src={imagePath} alt={movie.title} onError={(e) => { e.target.src = 'the-dark-knight-poster.jpg'; }}/>
         </div>
         <div className="movie-info">
           <div className='movie-info-title'>
@@ -146,11 +147,8 @@ useEffect(() => {
             <div className='movie-info-director'>
             Director:<p className='p-director'>{movie.director}</p>
             </div>
-            <div className='movie-info-duration'>
-            Screen Time:<p className='p-duration'>{movie.duration}</p>    
-            </div>
             <div className='container-description'>
-              <p>{movie.description}</p>
+              <p>{movie.movieDescription}</p>
             </div>    
           </div>
           <div className="general-rating">

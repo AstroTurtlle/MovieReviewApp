@@ -11,7 +11,7 @@ import axios from 'axios';
     try {
       const response = await axios.post('http://localhost:8080/user/addfilm', {
         userId: userId,
-        movieId: movie.id
+        movieId: movie.movieId
       });
       if (response.status === 201) {
         console.log('Film added to user\'s list successfully');
@@ -51,14 +51,14 @@ import axios from 'axios';
 
 
   return (
-    <Link to={`/movies/${movie.movieId}/add-review`} className="movie-card-link">
-    <div className="movie-card">
-      <OverlayTrigger placement="top" delay={{ show: 250, hide: 0 }} overlay={bookmark ? tooltip_Remove : tooltip_Bookmark}>
+    <div className='movie-card'>
+    <OverlayTrigger placement="top" delay={{ show: 250, hide: 0 }} overlay={bookmark ? tooltip_Remove : tooltip_Bookmark}>
         <div className='bookmark-film' onClick={bookmark ? handleRemoveBookmark : handleBookmark}>
           <i className='fas fa-bookmark bookmark' style={{ display: bookmark ? 'none' : '' }}></i>
           <i className='fas fa-times bookmark' style={{ display: bookmark ? '' : 'none' }}></i>
         </div>
       </OverlayTrigger>
+    <Link to={`/movies/${movie.movieId}/add-review`} className="movie-card-link">
         <img className='card-img' src={movie.imageBGposter} alt={movie.title} />
         <div className='rating-box'>
           <i className='fas fa-star mr-1 star'></i>
@@ -67,8 +67,8 @@ import axios from 'axios';
         <div className="movie-card-content">
           <h2 className='card-title'>{movie.title}</h2>
         </div>
-      </div>
     </Link>
+    </div>
   );
 };
 

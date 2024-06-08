@@ -8,7 +8,6 @@ import axios from 'axios';
 
 const HomePage=() => {
     const more_movies_amount = 15;
-    const more_movies_displaying = moviesData.slice(0,more_movies_amount)
     const category = 'Trending'
     const [movieData, setmovieData] = useState('');
     const [loading, setLoading] = useState(true);
@@ -36,7 +35,7 @@ const HomePage=() => {
 
     return (
         <div>
-        <SwiperBig movies={moviesData}>
+        <SwiperBig movies={movieData}>
         </SwiperBig>
         <SwiperSmall category={category} movies={movieData}>
         </SwiperSmall>

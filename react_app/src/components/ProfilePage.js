@@ -60,6 +60,7 @@ const ProfilePage = () => {
             if (!userInfoResponse.data.error) {
                 setuserName(userInfoResponse.data[0].userName);
                 setuserEmail(userInfoResponse.data[0].userEmail);
+                console.log(userInfoResponse.data);
                 setuserPass(userInfoResponse.data[0].userPassword);
             } else {
                 console.log("No results found for user info");

@@ -34,7 +34,7 @@ const SwiperBig = ({movies}) => {
           <img className='swiper-slidebig-img2' src={movie.imageBGbanner}></img>
           </div>
           <div className='swiper-slidebig-content'>
-                  <div className='swiper-slidebig-spotlight'>#{movie.id} Spotlight</div>
+                  <div className='swiper-slidebig-spotlight'>#{movie.movieId} Spotlight</div>
                   <div className='swiper-slidebig-title'>{movie.title}</div>
                   <div className='swiper-slidebig-details'>
                       <div className='swiper-slidebig-details-container'>
@@ -42,27 +42,25 @@ const SwiperBig = ({movies}) => {
                           {movie.rating}
                       </div>
                       <div className='swiper-slidebig-details-container'>
-                          <i className='fas fa-clock mr-1'></i>
-                          {movie.duration}
+                        <i className='fas fa-film mr-1'></i>
+                          {movie.director}
                       </div>
                       <div className='swiper-slidebig-details-container'>
                           <i className='fas fa-calendar mr-1'></i>
-                          {movie.datefilm}
+                          {movie.releaseDate.split('T')[0]}
                       </div>
                   </div>
                   <div className='swiper-slidebig-description'>
-                    {movie.description}             
+                    {movie.movieDescription}             
                   </div>
-                  <Link to={`/movies/${movie.id}/add-review`} className="movie-card-link">
+                  <Link to={`/movies/${movie.movieId}/add-review`} className="movie-card-link">
                   <div className='swiper-slidebig-button'>
                       Details
                       <i className='fas fa-angle-right ml-2'></i>
                   </div>
                   </Link>
               </div>
-              
       </SwiperSlide>
-        
       ))}
       </Swiper>
       <div className='swiperbig-navigation'>

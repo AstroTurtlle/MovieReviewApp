@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes,Navigate  } from 'react-router-dom';
 
 import MovieList from './MovieList';
@@ -17,11 +17,13 @@ import ProfilePage from './ProfilePage';
 import BookmarkPage from './BookmarkPage';
 import AllMoviesPage from './AllMoviesPage';
 import { isAuthenticated } from './Utils'; // Importă funcția isAuthenticated
+import axios from 'axios';
 
 
 const AppRoutes = () => {
   const [movies, setMovies] = useState(moviesData);
   const [filteredMovies, setFilteredMovies] = useState(moviesData);
+  const [loading, setLoading] = useState(true);
 
   const handleSearch = (query) => {
     const results = movies.filter(movie =>
@@ -33,6 +35,27 @@ const AppRoutes = () => {
   const resetSearch = () => {
     setFilteredMovies(moviesData); 
   };
+
+  useEffect(() => {
+    const fetchUserFilms = axios.get('http://localhost:8080/allfilms');
+
+    Promise.all([fetchUserFilms]).then((response) => {
+        const userFilmsResponse = response[0];
+
+        if (!userFilmsResponse.data.error) {
+            setMovies(userFilmsResponse.data);
+            console.log("data ", userFilmsResponse.data);
+        } else {
+            console.log("No results found for user films");
+        }
+
+        setLoading(false);
+    });
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
   return (
     <Router>
