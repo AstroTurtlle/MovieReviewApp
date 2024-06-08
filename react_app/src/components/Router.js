@@ -16,6 +16,10 @@ import ComedyPage from './ComedyPage';
 import ProfilePage from './ProfilePage';
 import BookmarkPage from './BookmarkPage';
 import AllMoviesPage from './AllMoviesPage';
+import Dramapage from './DramaPage';
+import SciFiPage from './SciFiPage';
+import Crimepage from './Crime';
+import FantasyPage from './Fantasy';
 import { isAuthenticated } from './Utils'; // Importă funcția isAuthenticated
 import axios from 'axios';
 
@@ -70,8 +74,11 @@ const AppRoutes = () => {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/action" element={<ActionPage />} />
-          <Route path="/comedy" element={<ComedyPage />} />
           <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/drama" element={<Dramapage />} />
+          <Route path="/scifi" element={<SciFiPage />} />
+          <Route path="/crime" element={<Crimepage />} />
+          <Route path="/fantasy" element={<FantasyPage />} />
          
    
           <Route path="/allmovies" element={<AllMoviesPage />} />

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MovieList from './MovieList';
-
-const ActionPage = () => {
+const Crimepage=() => {
     const [movies, setMovies] = useState([]);
 
     // Funcție pentru a prelua filmele de acțiune din API
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/action-movies', {
-                   
+                const response = await axios.get('http://localhost:8080/crime-movies', {
+                 
                 });
                 setMovies(response.data); // Setează filmele preluate
             } catch (error) {
@@ -24,14 +23,14 @@ const ActionPage = () => {
 
     return (
         <div className="category-page-container">
-            <div className="h2-heading category-page-title">
-                Action Movies
-            </div>
-            <div className="category-page-content">
-                <MovieList movies={movies} bookmark='true' />
-            </div>
+        <div className="h2-heading category-page-title">
+            Action Movies
         </div>
-    );
-};
+        <div className="category-page-content">
+            <MovieList movies={movies} bookmark='true' />
+        </div>
+    </div>
+        )
 
-export default ActionPage;
+}
+export default Crimepage;

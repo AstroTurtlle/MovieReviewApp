@@ -263,6 +263,58 @@ app.post('/editpass/:userId/:password', (req, res) => {
   });
 });
 
+app.get('/action-movies', (req, res) => {
+  const query = 'SELECT * FROM movies WHERE category = "Action"'; // Adaptează în funcție de schema bazei tale de date
+  connection.query(query, (err, results) => {
+      if (err) {
+          console.error('Eroare la preluarea filmelor:', err);
+          return res.status(500).send('Eroare la preluarea filmelor.');
+      }
+      res.json(results);
+  });
+});
+app.get('/drama-movies', (req, res) => {
+  const query = 'SELECT * FROM movies WHERE category = "Drama"'; // Adaptează în funcție de schema bazei tale de date
+  connection.query(query, (err, results) => {
+      if (err) {
+          console.error('Eroare la preluarea filmelor:', err);
+          return res.status(500).send('Eroare la preluarea filmelor.');
+      }
+      res.json(results);
+  });
+});
+app.get('/sci-fi-movies', (req, res) => {
+  const query = 'SELECT * FROM movies WHERE category = "Sci-Fi"'; // Adaptează în funcție de schema bazei tale de date
+  connection.query(query, (err, results) => {
+      if (err) {
+          console.error('Eroare la preluarea filmelor:', err);
+          return res.status(500).send('Eroare la preluarea filmelor.');
+      }
+      res.json(results);
+  });
+});
+app.get('/crime-movies', (req, res) => {
+  const query = 'SELECT * FROM movies WHERE category = "Crime"'; // Adaptează în funcție de schema bazei tale de date
+  connection.query(query, (err, results) => {
+      if (err) {
+          console.error('Eroare la preluarea filmelor:', err);
+          return res.status(500).send('Eroare la preluarea filmelor.');
+      }
+      res.json(results);
+  });
+});
+app.get('/fantasy-movies', (req, res) => {
+  const query = 'SELECT * FROM movies WHERE category = "Fantasy"'; // Adaptează în funcție de schema bazei tale de date
+  connection.query(query, (err, results) => {
+      if (err) {
+          console.error('Eroare la preluarea filmelor:', err);
+          return res.status(500).send('Eroare la preluarea filmelor.');
+      }
+      res.json(results);
+  });
+});
+
+
 app.listen(PORT, () => {
 console.log(`Express server running at http://localhost:${PORT}/`);
 });
