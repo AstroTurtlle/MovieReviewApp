@@ -4,6 +4,7 @@ import { FaCircleUser} from "react-icons/fa6";
 import { TbPasswordUser } from "react-icons/tb";
 import TextField from '@mui/material/TextField';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export const SignUpForm = () => {
@@ -15,12 +16,14 @@ export const SignUpForm = () => {
     const [usernameError, setUsernameError] = React.useState(false);
     const [emailError, setEmailError] = React.useState(false);
     const [passwordFormatError, setPasswordFormatError] = React.useState(false);
+    const navigate = useNavigate();
+
     function changeUsername(event) {
         const value = event.target.value;
         if (
             value.length > 15 ||
             /\s/.test(value) ||
-            /[,\.<>\[\]{};:'"?\/\\|!~`]/.test(value)
+            /[^a-zA-Z0-9_]/.test(value)
         ) {
             setUsernameError(true);
         } else {
@@ -30,9 +33,12 @@ export const SignUpForm = () => {
     }
     
     function changeEmail(event) {
-
         const value = event.target.value;
-        if (!/^\S+@\S+\S+\.com$/.test(value)) {
+        if (
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || 
+            /[!#$%^&*()_\-+={}[\]:;'"<>,\\|/]/.test(value) ||
+            !/\.com$/.test(value)
+        ) {
             setEmailError(true);
         } else {
             setEmailError(false);
@@ -42,7 +48,7 @@ export const SignUpForm = () => {
     function changePassword(event) {
         const value = event.target.value;
         if (
-            !/(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])(?!.*[<>\/\\|{}[\];:'"?\-+~\s])[A-Za-z\d!@#$%^&*()_+]{8,}/.test(value)
+            !/(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_])(?!.*[<>\/\\|{}[\];:'"?\-+~\s])[A-Za-z\d!@#$%^&*_]{8,}/.test(value)
         ) {
             setPasswordFormatError(true);
         } else {
@@ -56,19 +62,22 @@ export const SignUpForm = () => {
         
     }
     
-    function submit(event) {
+    async function submit(event) {
         event.preventDefault();
-        if (email!="" && !passwordError  && username!="" && !passwordFormatError && rePassword === password)
-            axios.post("http://localhost:8080/register", {
-                username: username,
-                email: email,
-                password: password
-            }).then((response) => {
-                const {data, status} = response;
+        try {
+            if (email !== "" && !passwordError && username !== "" && !passwordFormatError && rePassword === password) {
+                const response = await axios.post("http://localhost:8080/register", {
+                    username: username,
+                    email: email,
+                    password: password
+                });
                 console.log(response);
-            })
-        else
-            console.log("false")
+            } else {
+                console.log("Validation failed");
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
     }
 
     useEffect(() => {

@@ -44,7 +44,6 @@ const AppRoutes = () => {
 
         if (!userFilmsResponse.data.error) {
             setMovies(userFilmsResponse.data);
-            console.log("data ", userFilmsResponse.data);
         } else {
             console.log("No results found for user films");
         }

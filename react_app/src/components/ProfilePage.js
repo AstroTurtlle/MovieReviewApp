@@ -20,6 +20,7 @@ const ProfilePage = () => {
     const currentPassInputRef = useRef(null);
     const newPassInputRef = useRef(null);
     const confirmPassInputRef = useRef(null);
+    const [newPassword, setNewPassword] = React.useState('');
     const [passwordError, setPasswordError] = React.useState(false);
     const [currpasswordError, setCurrPasswordError] = React.useState(false);
     const [usernameError, setUsernameError] = React.useState(false);
@@ -30,7 +31,7 @@ const ProfilePage = () => {
         if (
             value.length > 15 ||
             /\s/.test(value) ||
-            /[,\.<>\[\]{};:'"?\/\\|!~`]/.test(value)
+            /[^a-zA-Z0-9_]/.test(value)
         ) {
             setUsernameError(true);
         } else {
@@ -41,12 +42,36 @@ const ProfilePage = () => {
     function changePassword(event) {
         const value = event.target.value;
         if (
-            !/(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])(?!.*[<>\/\\|{}[\];:'"?\-+~\s])[A-Za-z\d!@#$%^&*()_+]{8,}/.test(value)
+            !/(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_])(?!.*[<>\/\\|{}[\];:'"?\-+~\s])[A-Za-z\d!@#$%^&*_]{8,}/.test(value)
         ) {
             setPasswordFormatError(true);
         } else {
             setPasswordFormatError(false);
         }
+        if (value == "")
+            setPasswordFormatError(false);
+    }
+
+    function confirmPassword(event) {
+        const value = event.target.value;
+        if (newPassInputRef.current.value != value) {
+            setPasswordError(true);
+        } else {
+            setPasswordError(false);
+        }
+        if (value == "")
+            setPasswordError(false);
+    }
+
+    function currPassword(event) {
+        const value = event.target.value;
+        if (userPass != value) {
+            setCurrPasswordError(true);
+        } else {
+            setCurrPasswordError(false);
+        }
+        if (value == "")
+            setCurrPasswordError(false);
     }
 
     useEffect(() => {
@@ -60,7 +85,6 @@ const ProfilePage = () => {
             if (!userInfoResponse.data.error) {
                 setuserName(userInfoResponse.data[0].userName);
                 setuserEmail(userInfoResponse.data[0].userEmail);
-                console.log(userInfoResponse.data);
                 setuserPass(userInfoResponse.data[0].userPassword);
             } else {
                 console.log("No results found for user info");
@@ -176,7 +200,7 @@ const ProfilePage = () => {
                                         <div id='show-changepass' className='mt-3' >
                                             <div className='form-group'>
                                             <label className='form-label'>Curent password</label>
-                                                <input type='password' class='control-form' required ref={currentPassInputRef}></input>   
+                                                <input type='password' class='control-form' required ref={currentPassInputRef} onChange={currPassword}></input>   
                                             </div>
                                             <div className='form-group'>
                                             <label className='form-label'>New password</label>
@@ -184,7 +208,7 @@ const ProfilePage = () => {
                                             </div>
                                             <div className='form-group'>
                                             <label className='form-label'>Confirm new password</label>
-                                                <input type='password' class='control-form' required ref={confirmPassInputRef} ></input>   
+                                                <input type='password' class='control-form' required ref={confirmPassInputRef} onChange={confirmPassword} ></input>   
                                             </div>
                                         </div>
                                     </Collapse>
@@ -192,27 +216,28 @@ const ProfilePage = () => {
                                 <div className='col-xl-12 col-lg-12 col-md-12'>
                                         <div class='form-group'>
                                             <div className='mt-4'>
-                                                { passwordFormatError ? (
-                                                <button class='btn-save' onClick={handleClickChange}>Save</button>
-                                                ):(
+                                                { passwordFormatError || currpasswordError || passwordError || usernameError ? (
                                                 <button disabled class='btn-save' style={{backgroundColor: '#A9A9A9'}} onClick={handleClickChange}>Save</button>
+                                                ):(
+                                                    <button class='btn-save' onClick={handleClickChange}>Save</button>
                                                 )}
                                             </div>
                                         </div>
                                     </div>
-
-                                    { passwordError ? (
-                                    <div style={{ color: 'red' }}>Error: Passwords do not match</div>
-                                    ):(null)}
-                                    { currpasswordError ? (
-                                    <div style={{ color: 'red' }}>Error: Incorrect password</div>
-                                    ):(null)}
-                                    { passwordFormatError ? (
-                                    <div style={{ color: 'red' }}>Error: Password format is incorrect</div>
-                                    ):(null)}
-                                    { usernameError ? (
-                                    <div style={{ color: 'red' }}>Error: Incorrect password</div>
-                                    ):(null)}
+                                    <div className='col-xl-12 col-lg-12 col-md-12'>
+                                        { passwordError ? (
+                                        <div style={{ color: 'red' }}>Error: Passwords do not match </div>
+                                        ):(null)}
+                                        { currpasswordError ? (
+                                        <div style={{ color: 'red' }}>Error: Incorrect password</div>
+                                        ):(null)}
+                                        { passwordFormatError ? (
+                                        <div style={{ color: 'red' }}>Error: Password format is incorrect</div>
+                                        ):(null)}
+                                        { usernameError ? (
+                                        <div style={{ color: 'red' }}>Error: Incorrect username format</div>
+                                        ):(null)}
+                                    </div>
                             </div>
                         </div>
                     </div>

@@ -28,9 +28,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.post("/register", function(req, res) {
   const reqBody = req.body;
-  const userName = reqBody.userName;
-  const userEmail = reqBody.userEmail;
-  const userPassword = reqBody.userPassword;
+  const userName = reqBody.username;
+  const userEmail = reqBody.email;
+  const userPassword = reqBody.password;
 
   // Register
   const queryString = "INSERT INTO users (userName, userPassword, userEmail) VALUES (?, ?, ?)";
@@ -136,22 +136,6 @@ app.post('/reviews', (req, res) => {
 });
 
 //////////
-
-app.get('/userinfo', (req, res) => {
-  const { userId } = req.query;
-  const query = 'SELECT userName FROM Users WHERE userId = ?';
-  connection.query(query, [userId], (err, result) => {
-    if (err) {
-      console.error('eroare la afisarea informatiilor:', err);
-      res.status(500).send('eroare la afisarea informatiilor');
-    }else {
-      console.log('informatiile au fost afisate cu succes');
-      res.status(200).send(result);
-    }
-  });
-});
-
-
 
 //API for getting max 10 names of movies associated with the search query through the api
 app.get('/search', async function (request, response) {
