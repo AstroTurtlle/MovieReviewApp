@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import Collapse from 'react-bootstrap/Collapse';
 import axios from 'axios';
 
@@ -25,6 +26,7 @@ const ProfilePage = () => {
     const [currpasswordError, setCurrPasswordError] = React.useState(false);
     const [usernameError, setUsernameError] = React.useState(false);
     const [passwordFormatError, setPasswordFormatError] = React.useState(false);
+    const navigate = useNavigate();
 
     function changeUsername(event) {
         const value = event.target.value;
@@ -59,8 +61,6 @@ const ProfilePage = () => {
         } else {
             setPasswordError(false);
         }
-        if (value == "")
-            setPasswordError(false);
     }
 
     function currPassword(event) {
@@ -95,6 +95,8 @@ const ProfilePage = () => {
     }, []);
 
     async function handleClickChange() {
+        var p = false;
+        var u = false;
         if(isChangePassHidden) {
             if(userPass != currentPassInputRef.current.value) {
                 setCurrPasswordError(true);
@@ -109,6 +111,7 @@ const ProfilePage = () => {
                             const response = await axios.post(`http://localhost:8080/editpass/${userId}/${newPassInputRef.current.value}`);
                             if (response.status === 200) {
                             console.log('User updated succesfully');
+                            p = true;
                             } else {
                             console.log('Failed to update user');
                             }
@@ -125,6 +128,7 @@ const ProfilePage = () => {
                 const response = await axios.post(`http://localhost:8080/edit/${userId}/${userNameInputRef.current.value}`);
                 if (response.status === 200) {
                 console.log('User updated succesfully');
+                u = true;
                 } else {
                 console.log('Failed to update user');
                 }
@@ -132,6 +136,8 @@ const ProfilePage = () => {
                 console.error('Error updating user', error);
             }
         }
+        if (u || p)
+            navigate('/');
     }
 
     if (loading) {

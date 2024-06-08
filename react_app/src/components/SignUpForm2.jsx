@@ -72,6 +72,7 @@ export const SignUpForm = () => {
                     password: password
                 });
                 console.log(response);
+                navigate("/login");
             } else {
                 console.log("Validation failed");
             }
